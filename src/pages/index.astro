@@ -1,0 +1,602 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Figure from '../components/Figure.astro';
+import Accordion from '../components/Accordion.astro';
+import CopyAddress from '../components/CopyAddress.astro';
+import TreatmentSelector from '../components/TreatmentSelector.astro';
+import { PRACTICE } from '../data/practice';
+import { TREATMENTS, TREATMENT_BY_SLUG } from '../data/treatments';
+import { HOME_FAQ } from '../data/faq';
+import { BODY_STREET_LANDMARK_CONFIRMED, BODY_STREET_CAPTION } from '../data/assets';
+
+const pzr = TREATMENT_BY_SLUG['professionelle-zahnreinigung-muenchen'];
+const kronen = TREATMENT_BY_SLUG['kronen-bruecken-muenchen'];
+
+const steps = [
+  {
+    n: '01',
+    h: 'Anrufen',
+    p: 'Unter 089 537901. Wenn gerade behandelt wird, versuchen Sie es bitte kurz später noch einmal.',
+  },
+  {
+    n: '02',
+    h: 'Anliegen schildern',
+    p: 'Ein, zwei Sätze genügen: Kontrolle, Beschwerden, Reinigung oder Beratung zu Zahnersatz. Danach richtet sich, wie viel Zeit eingeplant wird.',
+  },
+  {
+    n: '03',
+    h: 'Termin festhalten',
+    p: 'Sie erhalten Ihre Zeit direkt am Telefon. Fragen Sie dabei gleich, was Sie mitbringen sollen.',
+  },
+];
+---
+<Base
+  title="Dr. Hrvoje Marijan – Zahnarzt in München, Kapuzinerstraße 11"
+  description="Zahnarztpraxis Dr. Hrvoje Marijan in München-Isarvorstadt. Untersuchung, professionelle Zahnreinigung, Kronen und Brücken, Zahnentfernung. Termine telefonisch unter 089 537901."
+>
+  <Hero />
+
+  <!-- 02 · Einordnung ------------------------------------------------------ -->
+  <section class="section intro" aria-labelledby="intro-title">
+    <div class="shell intro__inner">
+      <p class="eyebrow eyebrow--accent intro__label">Die Praxis in einem Satz</p>
+      <div class="intro__body">
+        <h2 id="intro-title" class="intro__statement">
+          Eine zahnärztliche Praxis in der Kapuzinerstraße, mitten in der
+          Ludwigsvorstadt-Isarvorstadt – für Menschen, die wissen möchten,
+          woran sie sind, bevor behandelt wird.
+        </h2>
+        <p class="intro__note">
+          Vier Bereiche bilden den Kern der Arbeit: Untersuchung und Beratung, professionelle
+          Zahnreinigung, Kronen und Brücken sowie die Entfernung eines Zahnes, wenn er nicht
+          mehr zu erhalten ist. Was davon für Sie infrage kommt, ergibt sich aus der
+          Untersuchung – nicht aus einer Website.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 · Behandlungsindex ------------------------------------------------ -->
+  <section class="section band-paper" aria-labelledby="treat-title">
+    <div class="shell">
+      <div class="section-head">
+        <div class="section-head__meta stack" style="--flow: var(--sp-2);">
+          <p class="section-head__index">01 — Behandlungen</p>
+          <h2 id="treat-title" class="section-head__title">Womit sich die Praxis befasst</h2>
+        </div>
+        <p class="section-head__aside">
+          Jeder Bereich hat eine eigene Seite mit allgemeinen Hintergründen und den Fragen,
+          die sich im Gespräch klären lassen.
+        </p>
+      </div>
+
+      <ol class="index">
+        {TREATMENTS.map((t, i) => (
+          <li class="index__row">
+            <a class="index__link" href={t.slug === 'behandlungen' ? '/behandlungen/' : `/${t.slug}/`}>
+              <span class="index__num">{String(i + 1).padStart(2, '0')}</span>
+              <span class="index__main">
+                <span class="index__title">{t.nav}</span>
+                <span class="index__teaser">{t.teaser}</span>
+              </span>
+              <span class="index__arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 04 · Gut informiert. Gut aufgehoben. --------------------------------- -->
+  <section class="section welcome" aria-labelledby="welcome-title">
+    <div class="shell welcome__inner">
+      <div class="welcome__text">
+        <p class="eyebrow eyebrow--accent">02 — Umgang</p>
+        <h2 id="welcome-title" class="welcome__title">Gut informiert.<br />Gut aufgehoben.</h2>
+        <p>
+          Die meisten Unsicherheiten beim Zahnarzt entstehen nicht durch die Behandlung,
+          sondern durch fehlende Erklärung. Deshalb steht am Anfang das Gespräch: Was wurde
+          festgestellt, was folgt daraus, welche Möglichkeiten gibt es – und was passiert,
+          wenn zunächst nichts unternommen wird.
+        </p>
+        <p>
+          Sie müssen im Termin nichts entscheiden, was Sie nicht verstanden haben.
+          Fragen Sie nach, so oft es nötig ist. Es hilft, sich vorher aufzuschreiben,
+          was Sie ansprechen möchten.
+        </p>
+        <ul class="welcome__points">
+          <li>Befund verständlich erklärt, bevor über Behandlung gesprochen wird</li>
+          <li>Kosten und Kassenanteil offen angesprochen</li>
+          <li>Zeit für Rückfragen – auch beim zweiten Termin</li>
+        </ul>
+      </div>
+      <div class="welcome__media">
+        <Figure slot="welcome" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · Professionelle Zahnreinigung ------------------------------------ -->
+  <section class="section section--tight band-sand" aria-labelledby="pzr-title">
+    <div class="shell pzr__inner">
+      <div class="pzr__media">
+        <Figure slot="stillLife" />
+      </div>
+      <div class="pzr__text">
+        <p class="eyebrow eyebrow--accent">03 — Vorbeugen</p>
+        <h2 id="pzr-title" class="pzr__title">Professionelle Zahnreinigung.</h2>
+        <p>
+          Sauber aussehende Zähne sind der angenehme Nebeneffekt. Der eigentliche Zweck ist
+          medizinisch: Beläge dort zu entfernen, wo Bürste und Zahnseide systematisch nicht
+          hinkommen – in den Zwischenräumen, am Zahnfleischrand und um vorhandenen Zahnersatz.
+        </p>
+        <p class="pzr__meta">
+          In welchem Abstand eine Reinigung sinnvoll ist, hängt vom individuellen Risiko ab
+          und gehört ins Gespräch nach der Untersuchung.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn--ghost" href={`/${pzr.slug}/`}>Was dahintersteckt</a>
+          <a class="link" href={PRACTICE.phoneHref}>
+            {PRACTICE.phoneDisplay}
+            <span class="link__arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 · Zahnersatz (dunkler Akzent) ------------------------------------- -->
+  <section class="section band-ink crown" aria-labelledby="crown-title">
+    <div class="shell crown__inner">
+      <div class="crown__text">
+        <p class="eyebrow eyebrow--accent">04 — Zahnersatz</p>
+        <h2 id="crown-title" class="crown__title">Zahnersatz mit Blick auf das Ganze.</h2>
+        <p>
+          Eine Krone oder Brücke ersetzt nicht nur, was fehlt. Sie greift in ein System ein:
+          Nachbarzähne, Bisslage, Belastung beim Kauen. Deshalb ist die erste Frage nie,
+          welche Versorgung die schönste ist, sondern welche in Ihrem Gebiss trägt.
+        </p>
+        <p>
+          Dazu gehört auch die ehrliche Seite: Für eine Brücke müssen die angrenzenden Zähne
+          beschliffen werden, und nicht jeder Zahn ist als Pfeiler geeignet. Was möglich ist,
+          zeigt die Untersuchung.
+        </p>
+        <div class="btn-row" style="margin-top: var(--sp-4);">
+          <a class="btn" href={`/${kronen.slug}/`}>Kronen &amp; Brücken</a>
+          <a class="btn btn--ghost" href={PRACTICE.phoneHref}>Beratung telefonisch</a>
+        </div>
+      </div>
+      <div class="crown__media">
+        <Figure slot="crown" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 · Praxis & Arzt ---------------------------------------------------- -->
+  <section class="section" aria-labelledby="praxis-title">
+    <div class="shell">
+      <div class="section-head">
+        <div class="section-head__meta stack" style="--flow: var(--sp-2);">
+          <p class="section-head__index">05 — Praxis</p>
+          <h2 id="praxis-title" class="section-head__title">Wer hier behandelt</h2>
+        </div>
+        <p class="section-head__aside">
+          Bewusst zurückhaltend: Auf dieser Seite steht nur, was sich öffentlich belegen lässt.
+        </p>
+      </div>
+
+      <div class="praxis">
+        <div class="praxis__text">
+          <p class="serif-note">
+            Dr. Hrvoje Marijan führt eine zahnärztliche Praxis in der Kapuzinerstraße 11
+            in München. Der Auftritt der Praxis richtet sich auf Deutsch und auf
+            Bosnisch/Kroatisch/Serbisch an Patientinnen und Patienten.
+          </p>
+          <p style="margin-top: var(--sp-4);">
+            Zu Werdegang, Team und Ausstattung liegen für diesen Entwurf keine bestätigten
+            Angaben vor. Statt sie zu erfinden, bleiben diese Abschnitte offen, bis die Praxis
+            sie selbst ergänzt. Was Sie hier lesen, stammt aus öffentlichen Verzeichnissen und
+            dem Auftritt der Praxis.
+          </p>
+          <p style="margin-top: var(--sp-3);">
+            <a class="link" href="/praxis/">
+              Mehr über die Praxis
+              <span class="link__arrow" aria-hidden="true">→</span>
+            </a>
+          </p>
+        </div>
+
+        <dl class="praxis__facts">
+          <div><dt>Praxis</dt><dd>{PRACTICE.practiceName}</dd></div>
+          <div><dt>Fachgebiet</dt><dd>{PRACTICE.profession}</dd></div>
+          <div><dt>Stadtbezirk</dt><dd>{PRACTICE.district}</dd></div>
+          <div>
+            <dt>Versicherung</dt>
+            <dd>
+              Gesetzlich und privat Versicherte
+              <span class="praxis__hint">Verzeichnisangabe – bitte beim Anruf kurz bestätigen</span>
+            </dd>
+          </div>
+          <div>
+            <dt>Terminvergabe</dt>
+            <dd>
+              Telefonisch
+              <span class="praxis__hint">Eine Online-Terminbuchung ist für diesen Entwurf nicht bestätigt</span>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 · Erster Kontakt + Auswahl ----------------------------------------- -->
+  <section class="section band-paper" aria-labelledby="kontaktweg-title">
+    <div class="shell">
+      <div class="section-head">
+        <div class="section-head__meta stack" style="--flow: var(--sp-2);">
+          <p class="section-head__index">06 — Erster Kontakt</p>
+          <h2 id="kontaktweg-title" class="section-head__title">So kommt ein Termin zustande</h2>
+        </div>
+        <p class="section-head__aside">
+          Ein Anruf, drei Minuten. Diese Website nimmt bewusst keine Termine entgegen und
+          speichert keine Patientendaten.
+        </p>
+      </div>
+
+      <ol class="steps">
+        {steps.map((s) => (
+          <li class="steps__item">
+            <span class="steps__num">{s.n}</span>
+            <h3 class="steps__h">{s.h}</h3>
+            <p class="steps__p">{s.p}</p>
+          </li>
+        ))}
+      </ol>
+
+      <div class="picker">
+        <div class="picker__head">
+          <h3 class="picker__title">Worüber möchten Sie sprechen?</h3>
+          <p class="picker__note">
+            Wählen Sie ein Thema – Sie sehen dann, worum es dabei allgemein geht und welche
+            Fragen sich im Termin klären lassen. Es findet keine Einschätzung Ihrer Beschwerden statt.
+          </p>
+        </div>
+        <TreatmentSelector />
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 · Sprache ---------------------------------------------------------- -->
+  <section class="section section--tight lang" aria-labelledby="lang-title">
+    <div class="shell lang__inner">
+      <div>
+        <p class="eyebrow eyebrow--accent">07 — Sprache</p>
+        <h2 id="lang-title" class="lang__title">Deutsch · Bosanski / Hrvatski / Srpski</h2>
+      </div>
+      <div class="lang__body">
+        <p>
+          Diese Website ist auf Deutsch verfasst. Der Instagram-Auftritt der Praxis
+          veröffentlicht auch auf Bosnisch, Kroatisch und Serbisch.
+        </p>
+        <p>
+          Daraus lässt sich allerdings nicht ableiten, welche Sprache im Behandlungszimmer
+          angeboten wird. Fragen Sie das bitte kurz beim Anruf. Die wichtigsten Angaben
+          finden Sie zusammengefasst auf einer eigenen Seite.
+        </p>
+        <p style="margin-top: var(--sp-3);">
+          <a class="link" href="/hr/" lang="hr">
+            Informacije na hrvatskom / bosanskom / srpskom
+            <span class="link__arrow" aria-hidden="true">→</span>
+          </a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · Fragen ----------------------------------------------------------- -->
+  <section class="section band-sand" aria-labelledby="faq-title">
+    <div class="shell faq__inner">
+      <div class="faq__aside">
+        <p class="eyebrow eyebrow--accent">08 — Häufige Fragen</p>
+        <h2 id="faq-title" class="faq__title">Bevor Sie anrufen</h2>
+        <p class="faq__note">
+          Wo eine Angabe nicht bestätigt ist, steht das hier auch so. Verlässlich ist in
+          diesen Fällen nur die Auskunft der Praxis selbst.
+        </p>
+      </div>
+      <div class="faq__list">
+        <Accordion items={HOME_FAQ} idPrefix="home-faq" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · Kontakt & Anfahrt ------------------------------------------------ -->
+  <section class="section" id="kontakt" aria-labelledby="anfahrt-title">
+    <div class="shell">
+      <div class="section-head">
+        <div class="section-head__meta stack" style="--flow: var(--sp-2);">
+          <p class="section-head__index">09 — Kontakt &amp; Anfahrt</p>
+          <h2 id="anfahrt-title" class="section-head__title">Kapuzinerstraße 11</h2>
+        </div>
+        <p class="section-head__aside">
+          Die Praxis liegt in der Ludwigsvorstadt-Isarvorstadt. Für die Route öffnet der
+          Link Google Maps in einem neuen Tab – eingebettet ist keine Karte.
+        </p>
+      </div>
+
+      <div class="anfahrt">
+        <div class="anfahrt__media">
+          <Figure slot="entrance" />
+          {BODY_STREET_LANDMARK_CONFIRMED && <p class="anfahrt__caption">{BODY_STREET_CAPTION}</p>}
+        </div>
+        <div class="anfahrt__info">
+          <address class="anfahrt__addr">
+            {PRACTICE.practiceName}<br />
+            {PRACTICE.street}<br />
+            {PRACTICE.postalCode} {PRACTICE.city}
+          </address>
+          <p class="anfahrt__phone">
+            <a href={PRACTICE.phoneHref}>{PRACTICE.phoneDisplay}</a>
+          </p>
+          <div class="btn-row anfahrt__actions">
+            <a class="btn btn--accent" href={PRACTICE.phoneHref}>Termin telefonisch vereinbaren</a>
+            <a class="btn btn--ghost" href={PRACTICE.mapsUrl} rel="noopener noreferrer" target="_blank">
+              Route in Google Maps
+              <span class="visually-hidden">(öffnet in einem neuen Tab)</span>
+            </a>
+          </div>
+          <div class="anfahrt__copy">
+            <CopyAddress />
+          </div>
+          <p class="anfahrt__more">
+            <a class="link" href="/kontakt/">
+              Alle Kontaktangaben
+              <span class="link__arrow" aria-hidden="true">→</span>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 · Abschluss --------------------------------------------------------- -->
+  <section class="closing band-ink grain" aria-labelledby="closing-title">
+    <div class="shell closing__inner">
+      <p class="eyebrow eyebrow--accent">Termin</p>
+      <h2 id="closing-title" class="closing__title">
+        Rufen Sie an – der Rest ergibt sich im Gespräch.
+      </h2>
+      <a class="closing__phone" href={PRACTICE.phoneHref}>{PRACTICE.phoneDisplay}</a>
+      <p class="closing__note">
+        {PRACTICE.street} · {PRACTICE.postalCode} {PRACTICE.city}
+      </p>
+      <p class="closing__fine">
+        Außerhalb der Sprechzeiten hilft der
+        <a href={PRACTICE.emergencyUrl} rel="noopener noreferrer" target="_blank">zahnärztliche Notdienst der KZVB</a>
+        weiter. Diese Praxis betreibt keinen eigenen Notdienst.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* --- 02 Intro ---------------------------------------------------------- */
+  .intro__inner { display: grid; gap: var(--sp-3); }
+  .intro__label { padding-top: 0.5rem; }
+  .intro__statement {
+    font-size: var(--step-3);
+    line-height: 1.24;
+    letter-spacing: -0.016em;
+    max-width: 27ch;
+    margin: 0;
+  }
+  .intro__note { margin-top: var(--sp-4); color: var(--muted); max-width: 34rem; }
+  @media (min-width: 56rem) {
+    .intro__inner { grid-template-columns: 12rem minmax(0, 1fr); column-gap: var(--sp-6); }
+  }
+
+  /* --- 03 Index ---------------------------------------------------------- */
+  .index { list-style: none; border-top: 1px solid var(--rule); }
+  .index__row { border-bottom: 1px solid var(--rule); }
+  .index__link {
+    display: grid;
+    grid-template-columns: 2.75rem minmax(0, 1fr) 1.5rem;
+    align-items: baseline;
+    gap: var(--sp-2);
+    padding: var(--sp-4) 0;
+    text-decoration: none;
+    transition: background 320ms var(--ease), padding-inline 320ms var(--ease);
+  }
+  .index__link:hover { background: var(--warm-white); padding-inline: 1rem; }
+  .index__num {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .index__main { display: grid; gap: 0.4rem; }
+  .index__title {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    line-height: 1.16;
+    letter-spacing: -0.015em;
+    padding-right: var(--sp-3);
+  }
+  .index__teaser { color: var(--muted); font-size: var(--step--1); max-width: 46ch; }
+  .index__arrow { color: var(--accent); transition: transform 320ms var(--ease); justify-self: end; }
+  .index__link:hover .index__arrow { transform: translateX(4px); }
+  @media (min-width: 56rem) {
+    .index__link { grid-template-columns: 4rem minmax(0, 1fr) 2rem; gap: var(--sp-4); }
+    .index__main { grid-template-columns: minmax(0, 17rem) minmax(0, 1fr); gap: var(--sp-4); align-items: baseline; }
+  }
+
+  /* --- 04 Welcome -------------------------------------------------------- */
+  .welcome__inner { display: grid; gap: var(--sp-5); }
+  .welcome__title { margin: var(--sp-3) 0 var(--sp-4); }
+  .welcome__points {
+    list-style: none;
+    display: grid;
+    gap: 0.75rem;
+    margin-top: var(--sp-4);
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--rule);
+    max-width: 30rem;
+  }
+  .welcome__points li {
+    position: relative;
+    padding-left: 1.5rem;
+    font-size: var(--step--1);
+    color: var(--muted);
+  }
+  .welcome__points li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0.66em;
+    width: 0.7rem; height: 1px;
+    background: var(--accent);
+  }
+  @media (min-width: 60rem) {
+    .welcome__inner {
+      grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+      column-gap: clamp(2.5rem, 1rem + 5vw, 6rem);
+      align-items: center;
+    }
+    .welcome__media { margin-right: calc(-1 * clamp(0rem, -2rem + 4vw, 2.5rem)); }
+  }
+
+  /* --- 05 PZR ------------------------------------------------------------ */
+  .pzr__inner { display: grid; gap: var(--sp-5); }
+  .pzr__title { font-size: var(--step-3); margin: var(--sp-3) 0 var(--sp-3); }
+  .pzr__meta { color: var(--muted); font-size: var(--step--1); }
+  .pzr__inner .btn-row { margin-top: var(--sp-4); gap: var(--sp-3); }
+  @media (min-width: 56rem) {
+    .pzr__inner {
+      grid-template-columns: minmax(0, 0.62fr) minmax(0, 1fr);
+      column-gap: clamp(2.5rem, 1rem + 5vw, 5rem);
+      align-items: center;
+    }
+    .pzr__media { max-width: 26rem; }
+  }
+
+  /* --- 06 Crown ---------------------------------------------------------- */
+  .crown__inner { display: grid; gap: var(--sp-5); }
+  .crown__title { margin: var(--sp-3) 0 var(--sp-4); max-width: 16ch; }
+  @media (min-width: 60rem) {
+    .crown__inner {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
+      column-gap: clamp(2.5rem, 1rem + 5vw, 5.5rem);
+      align-items: center;
+    }
+    .crown__media { order: 2; }
+  }
+
+  /* --- 07 Praxis --------------------------------------------------------- */
+  .praxis { display: grid; gap: var(--sp-5); }
+  .praxis__facts { display: grid; gap: 0; margin: 0; border-top: 1px solid var(--rule); }
+  .praxis__facts > div {
+    display: grid;
+    grid-template-columns: minmax(6.5rem, 8rem) minmax(0, 1fr);
+    gap: var(--sp-3);
+    padding: 0.95rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .praxis__facts dt {
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: 0.28em;
+  }
+  .praxis__facts dd { margin: 0; font-size: var(--step--1); }
+  .praxis__hint { display: block; color: var(--ink-55); font-size: 0.8125rem; margin-top: 0.2rem; }
+  @media (min-width: 60rem) {
+    .praxis { grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr); column-gap: clamp(2.5rem, 1rem + 5vw, 5.5rem); }
+  }
+
+  /* --- 08 Steps + picker ------------------------------------------------- */
+  .steps { list-style: none; display: grid; gap: var(--sp-4); counter-reset: none; }
+  .steps__item { padding-top: var(--sp-3); border-top: 1px solid var(--rule); }
+  .steps__num {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    margin-bottom: 0.65rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .steps__h { font-size: var(--step-2); margin-bottom: 0.5rem; }
+  .steps__p { color: var(--muted); font-size: var(--step--1); }
+  @media (min-width: 48rem) { .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sp-4); } }
+
+  .picker {
+    margin-top: var(--sp-7);
+    padding: clamp(1.5rem, 1rem + 2.4vw, 2.75rem);
+    background: var(--warm-white);
+    border: 1px solid var(--rule);
+  }
+  .picker__head { max-width: 40rem; margin-bottom: var(--sp-4); }
+  .picker__title { font-size: var(--step-3); margin-bottom: 0.7rem; }
+  .picker__note { color: var(--muted); font-size: var(--step--1); }
+
+  /* --- 09 Sprache -------------------------------------------------------- */
+  .lang__inner { display: grid; gap: var(--sp-4); }
+  .lang__title { font-size: var(--step-3); margin-top: var(--sp-2); max-width: 18ch; }
+  .lang__body p { color: var(--muted); }
+  .lang__body p + p { margin-top: 0.85rem; }
+  @media (min-width: 56rem) {
+    .lang__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: var(--sp-6); align-items: start; }
+  }
+
+  /* --- 10 FAQ ------------------------------------------------------------ */
+  .faq__inner { display: grid; gap: var(--sp-5); }
+  .faq__title { font-size: var(--step-3); margin: var(--sp-3) 0 var(--sp-3); }
+  .faq__note { color: var(--muted); font-size: var(--step--1); max-width: 24rem; }
+  @media (min-width: 60rem) {
+    .faq__inner { grid-template-columns: minmax(0, 0.72fr) minmax(0, 1fr); column-gap: clamp(2.5rem, 1rem + 5vw, 5.5rem); align-items: start; }
+    .faq__aside { position: sticky; top: 6.5rem; }
+  }
+
+  /* --- 11 Anfahrt -------------------------------------------------------- */
+  .anfahrt { display: grid; gap: var(--sp-5); }
+  .anfahrt__caption { margin-top: 0.85rem; font-size: 0.875rem; color: var(--muted); }
+  .anfahrt__addr { font-style: normal; font-size: var(--step-1); line-height: 1.62; }
+  .anfahrt__phone { margin: var(--sp-3) 0 var(--sp-4); }
+  .anfahrt__phone a {
+    font-family: var(--font-display);
+    font-size: var(--step-4);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    transition: color 300ms var(--ease);
+  }
+  .anfahrt__phone a:hover { color: var(--teal); }
+  .anfahrt__copy { margin-top: var(--sp-4); }
+  .anfahrt__more { margin-top: var(--sp-4); }
+  @media (min-width: 60rem) {
+    .anfahrt { grid-template-columns: minmax(0, 1fr) minmax(0, 0.88fr); column-gap: clamp(2.5rem, 1rem + 5vw, 5rem); align-items: start; }
+  }
+
+  /* --- 12 Abschluss ------------------------------------------------------ */
+  .closing { position: relative; padding-block: clamp(4rem, 2.6rem + 6vw, 8rem); }
+  .closing__inner { text-align: center; display: grid; justify-items: center; gap: var(--sp-3); }
+  .closing__title { font-size: var(--step-4); max-width: 18ch; margin: 0; }
+  .closing__phone {
+    font-family: var(--font-display);
+    font-size: var(--step-5);
+    letter-spacing: -0.028em;
+    text-decoration: none;
+    color: #fff;
+    margin-top: var(--sp-2);
+    transition: color 300ms var(--ease);
+  }
+  .closing__phone:hover { color: #9fc2c8; }
+  .closing__note { color: #a4b0b2; font-size: var(--step--1); margin: 0; }
+  .closing__fine {
+    margin: var(--sp-4) 0 0;
+    max-width: 40rem;
+    font-size: 0.875rem;
+    color: #8b9a9d;
+    line-height: 1.6;
+  }
+  .closing__fine a { color: #cfd8da; text-underline-offset: 3px; }
+</style>

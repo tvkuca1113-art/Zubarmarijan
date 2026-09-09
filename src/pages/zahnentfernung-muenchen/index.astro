@@ -1,0 +1,17 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import TreatmentArticle from '../../components/TreatmentArticle.astro';
+import { TREATMENT_BY_SLUG } from '../../data/treatments';
+
+const t = TREATMENT_BY_SLUG['zahnentfernung-muenchen'];
+---
+<Base title={t.metaTitle} description={t.metaDescription}>
+  <PageHero
+    eyebrow={`${t.kicker} · München-Isarvorstadt`}
+    title={t.h1}
+    lede={t.teaser}
+    parent={{ href: '/behandlungen/', label: 'Behandlungen' }}
+  />
+  <TreatmentArticle treatment={t} />
+</Base>

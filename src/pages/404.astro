@@ -1,0 +1,75 @@
+---
+import Base from '../layouts/Base.astro';
+import { PRACTICE } from '../data/practice';
+import { TREATMENTS } from '../data/treatments';
+---
+<Base
+  title="Seite nicht gefunden – Dr. Hrvoje Marijan, Zahnarzt in München"
+  description="Diese Seite existiert nicht. Hier finden Sie die Behandlungsbereiche, die Kontaktangaben und die Telefonnummer der Praxis Dr. Hrvoje Marijan in München."
+>
+  <section class="nf grain">
+    <div class="shell"><div class="nf__inner">
+      <p class="eyebrow eyebrow--accent">Fehler 404</p>
+      <h1 class="nf__title">Diese Seite gibt es nicht.</h1>
+      <p class="nf__lede">
+        Möglicherweise hat sich die Adresse geändert oder ein Tippfehler eingeschlichen.
+        Der schnellste Weg zu einem Termin bleibt in jedem Fall derselbe.
+      </p>
+      <div class="btn-row nf__actions">
+        <a class="btn btn--accent" href={PRACTICE.phoneHref}>
+          <svg class="btn__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.5 5.2 2 2 0 0 1 6.5 3Z" stroke-linejoin="round"/>
+          </svg>
+          <span>{PRACTICE.phoneDisplay}</span>
+        </a>
+        <a class="btn btn--ghost" href="/">Zur Startseite</a>
+      </div>
+
+      <nav class="nf__nav" aria-label="Weiterführende Seiten">
+        <p class="nf__nav-h">Häufig gesucht</p>
+        <ul>
+          {TREATMENTS.map((t) => (
+            <li>
+              <a class="link" href={t.slug === 'behandlungen' ? '/behandlungen/' : `/${t.slug}/`}>
+                {t.nav}
+                <span class="link__arrow" aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))}
+          <li><a class="link" href="/kontakt/">Kontakt &amp; Anfahrt<span class="link__arrow" aria-hidden="true">→</span></a></li>
+          <li><a class="link" href="/praxis/">Die Praxis<span class="link__arrow" aria-hidden="true">→</span></a></li>
+          <li><a class="link" href="/hr/" lang="hr">Informacije na hrvatskom<span class="link__arrow" aria-hidden="true">→</span></a></li>
+        </ul>
+      </nav>
+
+      <p class="nf__addr">{PRACTICE.street} · {PRACTICE.postalCode} {PRACTICE.city}</p>
+    </div></div>
+  </section>
+</Base>
+
+<style>
+  .nf {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(3rem, 2rem + 5vw, 7rem);
+    background:
+      radial-gradient(70% 80% at 82% 12%, rgba(66, 106, 116, 0.1) 0%, rgba(66, 106, 116, 0) 62%),
+      var(--warm-white);
+    min-height: 60vh;
+  }
+  .nf__inner { max-width: 46rem; }
+  .nf__title { font-size: var(--step-4); margin: var(--sp-3) 0 var(--sp-4); }
+  .nf__lede { font-size: var(--step-1); line-height: 1.55; color: var(--ink-70); max-width: 32rem; }
+  .nf__actions { margin-top: var(--sp-4); }
+  .nf__nav { margin-top: var(--sp-6); padding-top: var(--sp-4); border-top: 1px solid var(--rule); }
+  .nf__nav-h {
+    font-size: 0.6875rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: var(--sp-3);
+  }
+  .nf__nav ul { list-style: none; display: grid; gap: 0.7rem; }
+  @media (min-width: 40rem) { .nf__nav ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem var(--sp-4); } }
+  .nf__addr { margin-top: var(--sp-5); font-size: 0.875rem; color: var(--ink-55); }
+</style>

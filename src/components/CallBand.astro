@@ -1,0 +1,43 @@
+---
+import { PRACTICE } from '../data/practice';
+interface Props { title?: string; note?: string; }
+const {
+  title = 'Besprechen Sie es im Termin.',
+  note = 'Termine werden telefonisch vereinbart. Diese Website nimmt keine Buchungen entgegen und speichert keine Patientendaten.',
+} = Astro.props;
+---
+<section class="callband band-ink grain" aria-labelledby="callband-title">
+  <div class="shell callband__inner">
+    <div>
+      <p class="eyebrow eyebrow--accent">Termin</p>
+      <h2 id="callband-title" class="callband__title">{title}</h2>
+      <p class="callband__note">{note}</p>
+    </div>
+    <div class="callband__action">
+      <a class="callband__phone" href={PRACTICE.phoneHref}>{PRACTICE.phoneDisplay}</a>
+      <a class="btn" href={PRACTICE.phoneHref}>Jetzt anrufen</a>
+      <p class="callband__addr">{PRACTICE.street} · {PRACTICE.postalCode} {PRACTICE.city}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .callband { position: relative; padding-block: clamp(3rem, 2.2rem + 4vw, 6rem); }
+  .callband__inner { display: grid; gap: var(--sp-5); }
+  .callband__title { font-size: var(--step-3); margin: var(--sp-3) 0 var(--sp-3); max-width: 18ch; }
+  .callband__note { color: #a4b0b2; font-size: var(--step--1); max-width: 32rem; }
+  .callband__action { display: grid; justify-items: start; gap: var(--sp-3); align-content: start; }
+  .callband__phone {
+    font-family: var(--font-display);
+    font-size: var(--step-4);
+    letter-spacing: -0.025em;
+    color: #fff;
+    text-decoration: none;
+    transition: color 300ms var(--ease);
+  }
+  .callband__phone:hover { color: #9fc2c8; }
+  .callband__addr { color: #8b9a9d; font-size: 0.875rem; margin: 0; }
+  @media (min-width: 56rem) {
+    .callband__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr); column-gap: var(--sp-6); align-items: center; }
+  }
+</style>

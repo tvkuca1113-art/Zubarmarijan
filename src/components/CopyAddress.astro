@@ -1,0 +1,79 @@
+---
+import { ADDRESS_ONE_LINE } from '../data/practice';
+---
+<button class="copy" type="button" data-address={ADDRESS_ONE_LINE}>
+  <svg class="copy__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+    <rect x="9" y="9" width="11" height="11" rx="2" /><path d="M5 15V6a2 2 0 0 1 2-2h9" />
+  </svg>
+  <span class="copy__label">Adresse kopieren</span>
+</button>
+<p class="copy__status" role="status" aria-live="polite"></p>
+
+<style>
+  .copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    min-height: 2.9rem;
+    padding: 0.6rem 1.15rem;
+    background: none;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.9375rem;
+    transition: border-color 260ms var(--ease), color 260ms var(--ease);
+  }
+  .copy:hover { border-color: var(--fg); }
+  .copy[data-state='done'] { border-color: var(--accent); color: var(--accent); }
+  .copy__icon { flex: none; }
+  .copy__status { font-size: 0.875rem; color: var(--muted); margin: 0.6rem 0 0; min-height: 1.3em; }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.copy').forEach((btn) => {
+    const address = btn.dataset.address ?? '';
+    const label = btn.querySelector('.copy__label');
+    const status = btn.parentElement?.querySelector<HTMLElement>('.copy__status');
+    const original = label?.textContent ?? 'Adresse kopieren';
+    let timer: number | undefined;
+
+    const report = (message: string, ok: boolean) => {
+      if (status) status.textContent = message;
+      if (label) label.textContent = ok ? 'Kopiert' : original;
+      btn.dataset.state = ok ? 'done' : '';
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        if (label) label.textContent = original;
+        btn.dataset.state = '';
+        if (status) status.textContent = '';
+      }, 4000);
+    };
+
+    btn.addEventListener('click', async () => {
+      // Preferred path: the async clipboard API.
+      try {
+        await navigator.clipboard.writeText(address);
+        report('Die Adresse liegt in der Zwischenablage.', true);
+        return;
+      } catch {
+        /* fall through */
+      }
+      // Fallback for insecure contexts and older browsers: a hidden field plus execCommand.
+      try {
+        const field = document.createElement('textarea');
+        field.value = address;
+        field.setAttribute('readonly', '');
+        field.style.cssText = 'position:fixed;top:-1000px;opacity:0';
+        document.body.appendChild(field);
+        field.select();
+        const ok = document.execCommand('copy');
+        document.body.removeChild(field);
+        if (ok) { report('Die Adresse liegt in der Zwischenablage.', true); return; }
+      } catch {
+        /* fall through */
+      }
+      // Last resort: never leave the visitor without the address.
+      report(`Kopieren ist in diesem Browser nicht möglich. Die Adresse lautet: ${address}`, false);
+    });
+  });
+</script>

@@ -1,0 +1,47 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  lede?: string;
+  /** Breadcrumb-style parent link. */
+  parent?: { href: string; label: string };
+}
+const { eyebrow, title, lede, parent } = Astro.props;
+---
+<section class="phero grain">
+  <div class="shell"><div class="phero__inner">
+    {parent && (
+      <p class="phero__crumb">
+        <a href={parent.href}>{parent.label}</a>
+        <span aria-hidden="true">/</span>
+      </p>
+    )}
+    <p class="eyebrow eyebrow--accent">{eyebrow}</p>
+    <h1 class="phero__title">{title}</h1>
+    {lede && <p class="lede phero__lede">{lede}</p>}
+  </div></div>
+</section>
+
+<style>
+  .phero {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(2.5rem, 1.6rem + 3.4vw, 5rem) clamp(2.25rem, 1.6rem + 2.6vw, 4rem);
+    background:
+      radial-gradient(80% 90% at 88% 8%, rgba(66, 106, 116, 0.09) 0%, rgba(66, 106, 116, 0) 60%),
+      var(--warm-white);
+    border-bottom: 1px solid var(--rule);
+  }
+  .phero__inner { max-width: 52rem; }
+  .phero__crumb {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    color: var(--muted);
+    margin-bottom: var(--sp-3);
+  }
+  .phero__crumb a { text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 1px; }
+  .phero__crumb a:hover { border-bottom-color: var(--accent); color: var(--accent); }
+  .phero__title { font-size: var(--step-4); margin: var(--sp-3) 0 0; max-width: 20ch; }
+  .phero__lede { margin-top: var(--sp-4); }
+</style>

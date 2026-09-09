@@ -1,0 +1,240 @@
+---
+import Base from '../../layouts/Base.astro';
+import { PRACTICE } from '../../data/practice';
+
+const podrucja = [
+  { n: 'Pregled i savjetovanje', d: 'Polazna točka za sve ostalo: utvrditi stanje zuba i desni i u miru dogovoriti što iz toga slijedi.', href: '/behandlungen/' },
+  { n: 'Profesionalno čišćenje zubi', d: 'Uklanjanje naslaga ondje gdje četkica i konac sustavno ne dopiru. Svrha je medicinska, a ne kozmetička.', href: '/professionelle-zahnreinigung-muenchen/' },
+  { n: 'Krunice i mostovi', d: 'Fiksni nadomjestak kad zub više nije cjelovit ili kad nedostaje. Odluka koja se tiče cijele čeljusti.', href: '/kronen-bruecken-muenchen/' },
+  { n: 'Vađenje zuba', d: 'Tek kada zub više nije moguće sačuvati. Prije toga se provjerava svaka druga mogućnost.', href: '/zahnentfernung-muenchen/' },
+];
+---
+<Base
+  lang="hr"
+  title="Zubar u Münchenu – ordinacija dr. Hrvoje Marijan, Kapuzinerstraße 11"
+  description="Informacije na hrvatskom, bosanskom i srpskom o stomatološkoj ordinaciji dr. Hrvoje Marijan u Münchenu: adresa, telefon, područja rada i dogovor termina."
+>
+  <section class="hrhero grain">
+    <div class="shell"><div class="hrhero__inner">
+      <p class="eyebrow eyebrow--accent">Informacije · Hrvatski / Bosanski / Srpski</p>
+      <h1 class="hrhero__title">Zubar u Münchenu</h1>
+      <p class="hrhero__lede">
+        Stomatološka ordinacija dr. Hrvoje Marijan nalazi se u Kapuzinerstraße 11, u
+        münchenskoj četvrti Ludwigsvorstadt-Isarvorstadt. Termini se dogovaraju telefonom.
+      </p>
+      <div class="btn-row hrhero__actions">
+        <a class="btn btn--accent" href={PRACTICE.phoneHref}>
+          <svg class="btn__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.5 5.2 2 2 0 0 1 6.5 3Z" stroke-linejoin="round"/>
+          </svg>
+          <span>Nazovite: {PRACTICE.phoneDisplay}</span>
+        </a>
+        <a class="btn btn--ghost" href={PRACTICE.mapsUrl} rel="noopener noreferrer" target="_blank">Ruta na Google Maps</a>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="section" aria-labelledby="podaci-title">
+    <div class="shell hr__grid">
+      <div class="hr__main">
+        <h2 id="podaci-title" class="hr__h2">Osnovni podaci</h2>
+        <dl class="hr__dl">
+          <div><dt>Ordinacija</dt><dd>{PRACTICE.practiceName}</dd></div>
+          <div><dt>Adresa</dt><dd>{PRACTICE.street}, {PRACTICE.postalCode} München</dd></div>
+          <div><dt>Četvrt</dt><dd>Ludwigsvorstadt-Isarvorstadt</dd></div>
+          <div><dt>Telefon</dt><dd><a href={PRACTICE.phoneHref}>{PRACTICE.phoneDisplay}</a></dd></div>
+          <div><dt>Iz inozemstva</dt><dd class="no-wrap">{PRACTICE.phoneInternational}</dd></div>
+          <div><dt>Termini</dt><dd>Telefonski</dd></div>
+          <div><dt>Radno vrijeme</dt><dd class="hr__missing">Nije potvrđeno – molimo raspitajte se telefonom</dd></div>
+        </dl>
+
+        <h2 class="hr__h2">Područja rada</h2>
+        <ul class="hr__list">
+          {podrucja.map((p) => (
+            <li>
+              <a class="hr__list-link" href={p.href} hreflang="de">
+                <span class="hr__list-name">{p.n}</span>
+                <span class="hr__list-arrow" aria-hidden="true">→</span>
+              </a>
+              <span class="hr__list-note">{p.d}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="hr__fine">
+          Detaljne stranice napisane su na njemačkom jeziku. Ovdje je sažetak onoga što je
+          javno potvrđeno. Usluge koje nisu navedene nisu time ni potvrđene ni isključene.
+        </p>
+
+        <h2 class="hr__h2">Kako dogovoriti termin</h2>
+        <ol class="hr__steps">
+          <li><strong>Nazovite</strong> broj {PRACTICE.phoneDisplay}. Ako se ne javi odmah, pokušajte malo kasnije.</li>
+          <li><strong>Recite ukratko o čemu se radi</strong> – kontrola, bolovi, čišćenje ili savjetovanje o nadomjestku.</li>
+          <li><strong>Dogovorite vrijeme</strong> i pitajte što trebate ponijeti sa sobom.</li>
+        </ol>
+        <p class="hr__fine">
+          Ova stranica ne prima rezervacije i ne prikuplja podatke o pacijentima.
+        </p>
+      </div>
+
+      <aside class="hr__side" aria-label="Napomene">
+        <div class="panel">
+          <h2 class="panel__h">O jeziku</h2>
+          <p class="panel__p">
+            Ordinacija na Instagramu objavljuje i na bosanskom, hrvatskom i srpskom jeziku.
+          </p>
+          <p class="panel__p">
+            Iz toga se ipak ne može zaključiti na kojem se jeziku vodi razgovor u ordinaciji.
+            Molimo, provjerite to kratko prilikom poziva.
+          </p>
+          <a class="link" href={PRACTICE.instagram} rel="noopener noreferrer" target="_blank">
+            Instagram {PRACTICE.instagramHandle}
+            <span class="link__arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <div class="panel panel--quiet">
+          <h2 class="panel__h">Osiguranje</h2>
+          <p class="panel__p">
+            Prema javnim imenicima ordinacija prima i pacijente s obveznim (gesetzlich)
+            i s privatnim osiguranjem.
+          </p>
+          <p class="panel__fine">
+            Podatak potječe iz imenika, a ne izravno od ordinacije. Potvrdite ga prilikom poziva.
+          </p>
+        </div>
+
+        <div class="panel panel--quiet">
+          <h2 class="panel__h">Hitni slučajevi</h2>
+          <p class="panel__p">
+            Izvan radnog vremena pomaže dežurna stomatološka služba Bavarske (KZVB).
+            Ova ordinacija nema vlastito dežurstvo.
+          </p>
+          <a class="link" href={PRACTICE.emergencyUrl} rel="noopener noreferrer" target="_blank">
+            KZVB dežurstvo
+            <span class="link__arrow" aria-hidden="true">→</span>
+          </a>
+          <p class="panel__fine">Kod životno ugrožavajućih stanja nazovite 112.</p>
+        </div>
+
+        <div class="panel panel--note">
+          <h2 class="panel__h">Napomena</h2>
+          <p class="panel__p">
+            Ovo je privatni prijedlog dizajna, a ne službena stranica ordinacije.
+            Podaci su preuzeti iz javnih izvora i tek ih ordinacija treba potvrditi.
+          </p>
+          <a class="link" href="/hinweise/" hreflang="de">
+            Pojedinosti (njemački)
+            <span class="link__arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section band-ink grain hrcall" aria-labelledby="hrcall-title">
+    <div class="shell hrcall__inner">
+      <p class="eyebrow eyebrow--accent">Termin</p>
+      <h2 id="hrcall-title" class="hrcall__title">Nazovite i dogovorite termin.</h2>
+      <a class="hrcall__phone" href={PRACTICE.phoneHref}>{PRACTICE.phoneDisplay}</a>
+      <p class="hrcall__addr">{PRACTICE.street} · {PRACTICE.postalCode} München</p>
+      <p class="hrcall__back">
+        <a href="/" hreflang="de">Deutsche Startseite</a>
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hrhero {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(2.5rem, 1.6rem + 3.4vw, 5rem) clamp(2.25rem, 1.6rem + 2.6vw, 4rem);
+    background:
+      radial-gradient(80% 90% at 86% 10%, rgba(66, 106, 116, 0.1) 0%, rgba(66, 106, 116, 0) 60%),
+      var(--warm-white);
+    border-bottom: 1px solid var(--rule);
+  }
+  .hrhero__inner { max-width: 52rem; }
+  .hrhero__title { font-size: var(--step-4); margin: var(--sp-3) 0 var(--sp-4); }
+  .hrhero__lede { font-size: var(--step-1); line-height: 1.55; color: var(--ink-70); max-width: 34rem; }
+  .hrhero__actions { margin-top: var(--sp-4); }
+
+  .hr__grid { display: grid; gap: var(--sp-6); }
+  .hr__main { max-width: 40rem; }
+  .hr__h2 {
+    font-size: var(--step-2);
+    margin: var(--sp-6) 0 var(--sp-3);
+    padding-top: var(--sp-3);
+    border-top: 1px solid var(--rule);
+    max-width: 24ch;
+  }
+  .hr__h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+
+  .hr__dl { display: grid; margin: 0; border-top: 1px solid var(--rule); }
+  .hr__dl > div {
+    display: grid;
+    grid-template-columns: minmax(7rem, 9rem) minmax(0, 1fr);
+    gap: var(--sp-2);
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hr__dl dt {
+    font-size: 0.6875rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: 0.3em;
+  }
+  .hr__dl dd { margin: 0; font-size: var(--step--1); }
+  .hr__missing { color: var(--ink-55); }
+
+  .hr__list { list-style: none; display: grid; gap: var(--sp-3); }
+  .hr__list li { display: grid; gap: 0.3rem; padding-bottom: var(--sp-3); border-bottom: 1px solid var(--rule); }
+  .hr__list-link {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--sp-2);
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    transition: color 280ms var(--ease);
+  }
+  .hr__list-link:hover { color: var(--teal); }
+  .hr__list-arrow { color: var(--accent); }
+  .hr__list-note { color: var(--muted); font-size: var(--step--1); max-width: 46ch; }
+  .hr__fine { margin-top: var(--sp-4); font-size: 0.8125rem; color: var(--ink-55); line-height: 1.6; }
+
+  .hr__steps { display: grid; gap: 0.7rem; padding-left: 1.2rem; }
+  .hr__steps li { color: var(--muted); font-size: var(--step--1); line-height: 1.6; padding-left: 0.3rem; }
+  .hr__steps strong { color: var(--fg); font-weight: 500; }
+
+  .hr__side { display: grid; gap: var(--sp-4); align-content: start; }
+  .panel { padding: clamp(1.35rem, 1rem + 1.6vw, 1.85rem); background: var(--paper); border: 1px solid var(--rule); }
+  .panel--quiet { background: var(--sand); border-color: #d9d2c5; }
+  .panel--note { background: transparent; border-style: dashed; }
+  .panel__h { font-size: var(--step-1); margin-bottom: var(--sp-2); }
+  .panel__p { font-size: 0.9375rem; color: var(--ink-70); line-height: 1.6; }
+  .panel__p + .panel__p { margin-top: 0.7rem; }
+  .panel__fine { margin-top: var(--sp-3); font-size: 0.8125rem; color: var(--ink-55); line-height: 1.55; }
+  .panel .link { margin-top: var(--sp-3); }
+
+  @media (min-width: 62rem) {
+    .hr__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 22rem); column-gap: clamp(2.5rem, 1rem + 5vw, 5rem); align-items: start; }
+  }
+
+  .hrcall__inner { text-align: center; display: grid; justify-items: center; gap: var(--sp-3); }
+  .hrcall__title { font-size: var(--step-3); max-width: 20ch; margin: 0; }
+  .hrcall__phone {
+    font-family: var(--font-display);
+    font-size: var(--step-5);
+    letter-spacing: -0.028em;
+    color: #fff;
+    text-decoration: none;
+    transition: color 300ms var(--ease);
+  }
+  .hrcall__phone:hover { color: #9fc2c8; }
+  .hrcall__addr { color: #a4b0b2; font-size: var(--step--1); margin: 0; }
+  .hrcall__back { margin: var(--sp-3) 0 0; font-size: 0.875rem; }
+  .hrcall__back a { color: #cfd8da; text-underline-offset: 3px; }
+</style>

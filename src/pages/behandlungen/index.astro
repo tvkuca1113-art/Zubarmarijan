@@ -1,0 +1,115 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import TreatmentArticle from '../../components/TreatmentArticle.astro';
+import { TREATMENTS, TREATMENT_BY_SLUG } from '../../data/treatments';
+
+const untersuchung = TREATMENT_BY_SLUG['behandlungen'];
+---
+<Base
+  title="Behandlungen – Zahnarzt Dr. Hrvoje Marijan, München-Isarvorstadt"
+  description="Die vier Bereiche der Praxis Dr. Hrvoje Marijan in München: Untersuchung und Beratung, professionelle Zahnreinigung, Kronen und Brücken sowie Zahnentfernung."
+>
+  <PageHero
+    eyebrow="Behandlungen"
+    title="Vier Bereiche, ein Ausgangspunkt"
+    lede="Alles beginnt mit der Untersuchung. Was danach sinnvoll ist, entscheidet sich im Gespräch – hier finden Sie die allgemeinen Hintergründe dazu."
+    parent={{ href: '/', label: 'Startseite' }}
+  />
+
+  <section class="section section--tight" aria-labelledby="uebersicht-title">
+    <div class="shell">
+      <h2 id="uebersicht-title" class="visually-hidden">Übersicht der Behandlungsbereiche</h2>
+      <ul class="cards">
+        {TREATMENTS.map((t, i) => {
+          const href = t.slug === 'behandlungen' ? '#untersuchung' : `/${t.slug}/`;
+          return (
+            <li class="cards__item">
+              <a class="cards__link" href={href}>
+                <span class="cards__num">{String(i + 1).padStart(2, '0')}</span>
+                <span class="cards__kicker">{t.kicker}</span>
+                <span class="cards__title">{t.nav}</span>
+                <span class="cards__teaser">{t.teaser}</span>
+                <span class="cards__more">
+                  {t.slug === 'behandlungen' ? 'Auf dieser Seite' : 'Zur Seite'}
+                  <span aria-hidden="true">→</span>
+                </span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+
+      <p class="scope">
+        Weitere Leistungen sind für diesen Entwurf nicht bestätigt und werden deshalb hier
+        nicht genannt. Was darüber hinaus möglich ist, erfahren Sie im Gespräch mit der Praxis.
+      </p>
+    </div>
+  </section>
+
+  <div id="untersuchung" class="anchor">
+    <div class="shell">
+      <p class="eyebrow eyebrow--accent anchor__label">01 — {untersuchung.nav}</p>
+      <h2 class="anchor__title">{untersuchung.h1}</h2>
+    </div>
+  </div>
+
+  <TreatmentArticle treatment={untersuchung} />
+</Base>
+
+<style>
+  .cards { list-style: none; display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+  .cards__link {
+    display: grid;
+    gap: 0.5rem;
+    height: 100%;
+    padding: clamp(1.35rem, 1rem + 1.6vw, 2.1rem);
+    background: var(--warm-white);
+    text-decoration: none;
+    transition: background 300ms var(--ease);
+  }
+  .cards__link:hover { background: var(--paper); }
+  .cards__num {
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .cards__kicker {
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .cards__title {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    line-height: 1.16;
+    letter-spacing: -0.015em;
+    margin-top: 0.15rem;
+  }
+  .cards__teaser { color: var(--muted); font-size: var(--step--1); line-height: 1.55; }
+  .cards__more {
+    margin-top: auto;
+    padding-top: var(--sp-3);
+    display: inline-flex;
+    gap: 0.45rem;
+    align-items: center;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--accent);
+  }
+  @media (min-width: 40rem) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 66rem) { .cards { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+  .scope {
+    margin-top: var(--sp-5);
+    max-width: 40rem;
+    font-size: var(--step--1);
+    color: var(--ink-55);
+  }
+
+  .anchor { padding-top: var(--sp-7); scroll-margin-top: 5.5rem; }
+  .anchor__label { margin-bottom: var(--sp-2); }
+  .anchor__title { font-size: var(--step-3); max-width: 20ch; }
+</style>

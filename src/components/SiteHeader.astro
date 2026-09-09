@@ -1,0 +1,114 @@
+---
+import { PRACTICE } from '../data/practice';
+import { TREATMENT_PAGES } from '../data/treatments';
+
+const path = Astro.url.pathname;
+const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+
+const nav = [
+  { href: '/behandlungen/', label: 'Behandlungen' },
+  { href: '/praxis/', label: 'Praxis' },
+  { href: '/kontakt/', label: 'Kontakt & Anfahrt' },
+];
+---
+<header class="hdr">
+  <div class="shell shell--wide hdr__inner">
+    <a class="mark" href="/" aria-label={`${PRACTICE.practiceName} – zur Startseite`}>
+      <span class="mark__name">Dr. Hrvoje Marijan</span>
+      <span class="mark__role">Zahnarzt · München</span>
+    </a>
+
+    <nav class="hdr__nav" aria-label="Hauptnavigation">
+      <ul class="hdr__list">
+        {nav.map((item) => (
+          <li>
+            <a href={item.href} class="hdr__link" aria-current={isActive(item.href) ? 'page' : undefined}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+        <li>
+          <a href="/hr/" class="hdr__link hdr__link--lang" aria-current={isActive('/hr/') ? 'page' : undefined}>
+            <span lang="hr">Informacije</span>
+            <span class="hdr__langtag" aria-hidden="true">HR/BKS</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <a class="btn btn--accent hdr__cta" href={PRACTICE.phoneHref}>
+      <svg class="btn__icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.5 5.2 2 2 0 0 1 6.5 3Z" stroke-linejoin="round"/>
+      </svg>
+      <span>{PRACTICE.phoneDisplay}</span>
+    </a>
+
+    <button class="hdr__burger" type="button" id="menu-toggle" aria-expanded="false" aria-controls="site-menu">
+      <span class="hdr__burger-lines" aria-hidden="true"><i></i><i></i></span>
+      <span class="visually-hidden">Menü öffnen</span>
+    </button>
+  </div>
+
+</header>
+
+  <div class="menu" id="site-menu" hidden>
+    <div class="shell menu__inner">
+      <ul class="menu__list">
+        <li><a href="/" class="menu__link">Startseite</a></li>
+        <li><a href="/behandlungen/" class="menu__link">Behandlungen</a></li>
+        {TREATMENT_PAGES.map((t) => (
+          <li><a href={`/${t.slug}/`} class="menu__link menu__link--sub">{t.nav}</a></li>
+        ))}
+        <li><a href="/praxis/" class="menu__link">Praxis</a></li>
+        <li><a href="/kontakt/" class="menu__link">Kontakt &amp; Anfahrt</a></li>
+        <li><a href="/hr/" class="menu__link" lang="hr">Informacije na hrvatskom</a></li>
+        <li><a href="/hinweise/" class="menu__link menu__link--sub">Hinweise zum Entwurf</a></li>
+      </ul>
+      <div class="menu__foot">
+        <a class="btn btn--accent menu__call" href={PRACTICE.phoneHref}>Termin telefonisch vereinbaren</a>
+        <p class="menu__addr">{PRACTICE.street}<br />{PRACTICE.postalCode} {PRACTICE.city}</p>
+      </div>
+    </div>
+  </div>
+
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('site-menu');
+  if (toggle && menu) {
+    const label = toggle.querySelector('.visually-hidden');
+    const positionMenu = () => {
+      // The demo notice sits above the sticky header, so the header's bottom edge
+      // moves with scroll position. Measure it instead of assuming a fixed offset.
+      const header = document.querySelector('.hdr');
+      const bottom = header ? Math.max(0, Math.round(header.getBoundingClientRect().bottom)) : 72;
+      menu.style.top = `${bottom}px`;
+    };
+
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      if (open) positionMenu();
+      menu.hidden = !open;
+      document.documentElement.classList.toggle('menu-open', open);
+      if (label) label.textContent = open ? 'Menü schließen' : 'Menü öffnen';
+      if (open) menu.querySelector<HTMLAnchorElement>('a')?.focus();
+    };
+    toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+    menu.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) setOpen(false);
+    });
+    // A resize into the desktop layout must not leave the panel latched open.
+    window.matchMedia('(min-width: 62rem)').addEventListener('change', (e) => {
+      if (e.matches && toggle.getAttribute('aria-expanded') === 'true') setOpen(false);
+    });
+    window.addEventListener('resize', () => {
+      if (toggle.getAttribute('aria-expanded') === 'true') positionMenu();
+    });
+  }
+</script>

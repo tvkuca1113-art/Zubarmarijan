@@ -1,0 +1,188 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Figure from '../../components/Figure.astro';
+import CopyAddress from '../../components/CopyAddress.astro';
+import { PRACTICE } from '../../data/practice';
+import { BODY_STREET_LANDMARK_CONFIRMED, BODY_STREET_CAPTION } from '../../data/assets';
+---
+<Base
+  title="Kontakt & Anfahrt – Zahnarzt Dr. Hrvoje Marijan, München"
+  description="Kontakt zur Zahnarztpraxis Dr. Hrvoje Marijan: Kapuzinerstraße 11, 80337 München-Isarvorstadt. Termine telefonisch unter 089 537901, Route über Google Maps."
+>
+  <PageHero
+    eyebrow="Kontakt & Anfahrt"
+    title="Kapuzinerstraße 11, München"
+    lede="Termine werden telefonisch vereinbart. Diese Website nimmt keine Buchungen entgegen und erhebt keine Patientendaten."
+    parent={{ href: '/', label: 'Startseite' }}
+  />
+
+  <section class="section" aria-labelledby="kontakt-title">
+    <div class="shell k__grid">
+      <div class="k__main">
+        <h2 id="kontakt-title" class="k__h2">So erreichen Sie die Praxis</h2>
+
+        <div class="k__phone-block">
+          <p class="k__phone-label">Telefon</p>
+          <a class="k__phone" href={PRACTICE.phoneHref}>{PRACTICE.phoneDisplay}</a>
+          <p class="k__phone-note">
+            Aus dem Ausland: <span class="no-wrap">{PRACTICE.phoneInternational}</span>
+          </p>
+        </div>
+
+        <div class="btn-row k__actions">
+          <a class="btn btn--accent" href={PRACTICE.phoneHref}>Termin telefonisch vereinbaren</a>
+          <a class="btn btn--ghost" href={PRACTICE.mapsUrl} rel="noopener noreferrer" target="_blank">
+            Route in Google Maps
+            <span class="visually-hidden">(öffnet in einem neuen Tab)</span>
+          </a>
+        </div>
+
+        <div class="k__address">
+          <p class="k__phone-label">Anschrift</p>
+          <address class="k__addr">
+            {PRACTICE.practiceName}<br />
+            {PRACTICE.street}<br />
+            {PRACTICE.postalCode} {PRACTICE.city}<br />
+            {PRACTICE.country}
+          </address>
+          <div class="k__copy"><CopyAddress /></div>
+        </div>
+
+        <h2 class="k__h2">Was beim Anruf hilft</h2>
+        <ul class="k__tips">
+          <li>Ein, zwei Sätze zum Anliegen: Kontrolle, Beschwerden, Reinigung oder Beratung zu Zahnersatz.</li>
+          <li>Ob Sie gesetzlich oder privat versichert sind.</li>
+          <li>Ob es eilt – und ab wann Sie Zeit hätten.</li>
+          <li>Bei bestehender Behandlung: was zuletzt gemacht wurde.</li>
+        </ul>
+
+        <h2 class="k__h2">Außerhalb der Sprechzeiten</h2>
+        <p>
+          Die aktuellen Sprechzeiten liegen für diesen Entwurf nicht bestätigt vor; erfragen
+          Sie sie bitte telefonisch. Bei akuten Beschwerden außerhalb der Sprechzeiten führt
+          der zahnärztliche Notdienst der Kassenzahnärztlichen Vereinigung Bayerns weiter.
+        </p>
+        <p>
+          <a class="link" href={PRACTICE.emergencyUrl} rel="noopener noreferrer" target="_blank">
+            Notdienstsuche der KZVB
+            <span class="link__arrow" aria-hidden="true">→</span>
+          </a>
+        </p>
+        <p class="k__fine">
+          Diese Praxis betreibt keinen eigenen Notdienst. Bei lebensbedrohlichen Notfällen
+          wählen Sie bitte die 112.
+        </p>
+      </div>
+
+      <aside class="k__side" aria-label="Eingang und Umgebung">
+        <div class="k__media">
+          <Figure slot="entrance" sizes="(max-width: 62rem) 92vw, 30rem" />
+          <p class="k__caption">
+            {BODY_STREET_LANDMARK_CONFIRMED
+              ? BODY_STREET_CAPTION
+              : 'Eingang Kapuzinerstraße 11. Ein Orientierungspunkt am Haus wird ergänzt, sobald die Praxis ihn bestätigt hat.'}
+          </p>
+        </div>
+
+        <div class="panel">
+          <h2 class="panel__h">Lage</h2>
+          <p class="panel__p">
+            Die Praxis liegt in der Ludwigsvorstadt-Isarvorstadt. Angaben zu Parkplätzen,
+            zur Barrierefreiheit und zur nächstgelegenen Haltestelle sind für diesen Entwurf
+            nicht bestätigt und stehen deshalb hier nicht.
+          </p>
+          <a class="btn btn--ghost panel__cta" href={PRACTICE.mapsUrl} rel="noopener noreferrer" target="_blank">
+            In Google Maps öffnen
+          </a>
+          <p class="panel__fine">
+            Es ist bewusst keine Karte eingebettet. Der Link öffnet Google Maps erst,
+            wenn Sie ihn anklicken.
+          </p>
+        </div>
+
+        <div class="panel panel--quiet">
+          <h2 class="panel__h">Online</h2>
+          <p class="panel__p">
+            Die Praxis veröffentlicht auf Instagram, auch auf Bosnisch/Kroatisch/Serbisch.
+          </p>
+          <a class="link" href={PRACTICE.instagram} rel="noopener noreferrer" target="_blank">
+            {PRACTICE.instagramHandle}
+            <span class="link__arrow" aria-hidden="true">→</span>
+          </a>
+          <p class="panel__fine">
+            Eine E-Mail-Adresse und eine Online-Terminbuchung sind für diesen Entwurf nicht
+            bestätigt. Der Anruf ist der verlässliche Weg.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .k__grid { display: grid; gap: var(--sp-6); }
+  .k__main { max-width: 40rem; }
+  .k__h2 {
+    font-size: var(--step-2);
+    margin: var(--sp-6) 0 var(--sp-3);
+    padding-top: var(--sp-3);
+    border-top: 1px solid var(--rule);
+    max-width: 24ch;
+  }
+  .k__h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+
+  .k__phone-label {
+    font-size: 0.6875rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+  .k__phone {
+    font-family: var(--font-display);
+    font-size: var(--step-5);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    text-decoration: none;
+    display: inline-block;
+    transition: color 300ms var(--ease);
+  }
+  .k__phone:hover { color: var(--teal); }
+  .k__phone-note { color: var(--muted); font-size: var(--step--1); margin-top: 0.65rem; }
+  .k__actions { margin-top: var(--sp-4); }
+  .k__address { margin-top: var(--sp-5); padding-top: var(--sp-4); border-top: 1px solid var(--rule); }
+  .k__addr { font-style: normal; font-size: var(--step-1); line-height: 1.62; }
+  .k__copy { margin-top: var(--sp-3); }
+
+  .k__tips { list-style: none; display: grid; gap: 0.7rem; max-width: 34rem; }
+  .k__tips li {
+    position: relative;
+    padding-left: 1.5rem;
+    color: var(--muted);
+    font-size: var(--step--1);
+    line-height: 1.55;
+  }
+  .k__tips li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0.68em;
+    width: 0.7rem; height: 1px;
+    background: var(--accent);
+  }
+  .k__fine { margin-top: var(--sp-3); font-size: 0.8125rem; color: var(--ink-55); }
+
+  .k__side { display: grid; gap: var(--sp-4); align-content: start; }
+  .k__caption { margin-top: 0.8rem; font-size: 0.875rem; color: var(--muted); line-height: 1.55; }
+
+  .panel { padding: clamp(1.35rem, 1rem + 1.6vw, 1.85rem); background: var(--paper); border: 1px solid var(--rule); }
+  .panel--quiet { background: var(--sand); border-color: #d9d2c5; }
+  .panel__h { font-size: var(--step-1); margin-bottom: var(--sp-2); }
+  .panel__p { font-size: 0.9375rem; color: var(--ink-70); line-height: 1.6; }
+  .panel__cta { margin-top: var(--sp-3); width: 100%; justify-content: center; }
+  .panel__fine { margin-top: var(--sp-3); font-size: 0.8125rem; color: var(--ink-55); line-height: 1.55; }
+
+  @media (min-width: 62rem) {
+    .k__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 24rem); column-gap: clamp(2.5rem, 1rem + 5vw, 5rem); align-items: start; }
+  }
+</style>

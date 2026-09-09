@@ -1,0 +1,277 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import { EVIDENCE, OPEN_QUESTIONS, PRACTICE } from '../../data/practice';
+import { IMAGE_SLOTS } from '../../data/assets';
+
+const displayed = EVIDENCE.filter((e) => e.approvedForDisplay);
+const background = EVIDENCE.filter((e) => !e.approvedForDisplay);
+
+const provenanceLabel: Record<string, string> = {
+  'ai-illustration': 'KI-generierte Illustration',
+  'retouched-practice-post': 'KI-retuschiertes Bild aus einem Praxis-Post',
+  pending: 'Offen',
+};
+
+const confidenceLabel: Record<string, string> = {
+  high: 'hoch',
+  medium: 'mittel',
+  low: 'niedrig',
+};
+---
+<Base
+  title="Hinweise zum Entwurf – Quellen, Bilder und offene Punkte"
+  description="Statusseite des privaten Website-Entwurfs für die Praxis Dr. Hrvoje Marijan: Quellenlage der verwendeten Angaben, Herkunft der Bilder und die Punkte, die vor einer Veröffentlichung geklärt werden müssen."
+>
+  <PageHero
+    eyebrow="Hinweise"
+    title="Status, Quellen und offene Punkte"
+    lede="Diese Seite gehört zum Entwurf, nicht zur Praxis. Sie legt offen, worauf jede Angabe beruht und was vor einer Veröffentlichung noch fehlt."
+    parent={{ href: '/', label: 'Startseite' }}
+  />
+
+  <section class="section" aria-labelledby="status-title">
+    <div class="shell"><div class="n__wrap">
+      <h2 id="status-title" class="n__h2">Was das hier ist</h2>
+      <p class="n__lede">
+        Ein unabhängiger, privater Gestaltungsentwurf für eine Zahnarztpraxis in München.
+        Er ist von der Praxis weder beauftragt noch freigegeben und ist kein offizieller
+        Internetauftritt.
+      </p>
+      <ul class="n__flags">
+        <li><strong>Nicht indexierbar.</strong> Alle Seiten tragen <code>noindex, nofollow</code>; die <code>robots.txt</code> sperrt den gesamten Auftritt. Es wurde nichts bei Suchmaschinen eingereicht.</li>
+        <li><strong>Keine Domain.</strong> Es wird keine offizielle Praxisdomain angenommen. Es gibt deshalb keine Canonical-URLs, keine Sitemap und keine hreflang-Auszeichnung.</li>
+        <li><strong>Keine strukturierten Daten.</strong> Dentist- bzw. LocalBusiness-Markup wird erst mit der Freigabe ergänzt – und nur mit Angaben, die auch auf der Website stehen.</li>
+        <li><strong>Keine Datenerhebung.</strong> Es gibt kein Kontaktformular, keine Terminbuchung, keine Analyse-Skripte, keine externen Schriften, keine eingebettete Karte und kein Instagram-Embed.</li>
+        <li><strong>Die Telefonnummer ist echt.</strong> Sie wurde ausschließlich aus öffentlichen Verzeichnissen übernommen. Im Rahmen dieser Arbeit wurde nicht in der Praxis angerufen und keine Nachricht gesendet.</li>
+      </ul>
+
+      <h2 class="n__h2">Belegte Angaben</h2>
+      <p>
+        Jede geschäftliche Angabe auf dieser Website lässt sich auf eine der folgenden Quellen
+        zurückführen. Stand der Prüfung: 9. September 2026.
+      </p>
+      <div class="ledger" role="table" aria-label="Quellenlage der verwendeten Angaben">
+        <div class="ledger__head" role="row">
+          <span role="columnheader">Angabe</span>
+          <span role="columnheader">Quelle</span>
+          <span role="columnheader">Sicherheit</span>
+        </div>
+        {displayed.map((e) => (
+          <div class="ledger__row" role="row">
+            <div role="cell" class="ledger__fact">
+              <p class="ledger__claim">{e.fact}</p>
+              {e.note && <p class="ledger__note">{e.note}</p>}
+            </div>
+            <div role="cell" class="ledger__src">
+              <ul>
+                {e.sources.map((s) => (
+                  <li><a href={s} rel="noopener noreferrer nofollow" target="_blank">{new URL(s).hostname.replace('www.', '')}</a></li>
+                ))}
+              </ul>
+            </div>
+            <div role="cell" class="ledger__conf">
+              <span class={`chip chip--${e.confidence}`}>{confidenceLabel[e.confidence]}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <h2 class="n__h2">Bewusst nicht dargestellt</h2>
+      <p>
+        Einzelne Feststellungen sind belegt, gehören aber nicht in den Patiententext. Sie
+        erklären, warum bestimmte Elemente fehlen.
+      </p>
+      <ul class="n__flags">
+        {background.map((e) => (
+          <li>
+            <strong>{e.fact}</strong> {e.note}
+            {' '}
+            {e.sources.map((s) => (
+              <a class="n__inline" href={s} rel="noopener noreferrer nofollow" target="_blank">Quelle</a>
+            ))}
+          </li>
+        ))}
+      </ul>
+
+      <h2 class="n__h2">Instagram</h2>
+      <p>
+        Der Instagram-Auftritt der Praxis ist als Sprach- und Leistungssignal in diesen
+        Entwurf eingeflossen. Beim Abruf aus der Arbeitsumgebung leitete Instagram auf die
+        Anmeldeseite weiter (HTTP 429), sodass die Beiträge <strong>nicht unabhängig eingesehen</strong>
+        werden konnten. Zugangsbeschränkungen wurden nicht umgangen.
+      </p>
+      <p>
+        Angaben, die allein auf Instagram beruhen, sind oben mit mittlerer Sicherheit
+        gekennzeichnet. Ältere Aktionen und Ankündigungen aus diesem Kanal – etwa
+        Sommerpreise oder Schließzeiten – sind historisch und erscheinen an keiner Stelle
+        als aktuelles Angebot.
+      </p>
+
+      <h2 class="n__h2">Bilder und Herkunft</h2>
+      <p>
+        Der Entwurf sieht fünf Bildplätze vor. Solange eine Datei fehlt, zeigt die Seite an
+        derselben Stelle und im selben Seitenverhältnis eine gestaltete Fläche, damit sich
+        das Layout beim Einsetzen des Fotos nicht verschiebt.
+      </p>
+      <div class="assets">
+        {Object.values(IMAGE_SLOTS).map((slot) => (
+          <div class="assets__row">
+            <div>
+              <p class="assets__name">{slot.plateLabel}</p>
+              <p class="assets__file"><code>{slot.file}</code></p>
+            </div>
+            <div>
+              <p class="assets__prov">{provenanceLabel[slot.provenance]}</p>
+              <p class="assets__note">{slot.provenanceNote}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <ul class="n__flags" style="margin-top: var(--sp-4);">
+        <li>Die Porträt- und Eingangsbilder gehen auf öffentliche Praxis-Beiträge zurück und wurden retuschiert; Bildbereiche sind dabei rekonstruiert. Eine Erlaubnis zur Verwendung außerhalb der Plattform liegt nicht vor.</li>
+        <li>Kein Gesicht wurde generativ entfernt oder ersetzt. Es werden keine Fotos anderer Praxen verwendet.</li>
+        <li>Es werden keine ablaufenden Social-CDN-Adressen verlinkt. Alle Bilddateien liegen lokal im Projekt.</li>
+        <li>Die Illustrationen zeigen keine Patientinnen oder Patienten, keine Behandlungsergebnisse und keine belegte Praxisausstattung.</li>
+      </ul>
+
+      <h2 class="n__h2">Was vor einer Veröffentlichung fehlt</h2>
+      <p>
+        Diese Punkte kann nur die Praxis beantworten. Bis dahin bleiben sie auf der Website
+        entweder offen oder ausdrücklich als unbestätigt gekennzeichnet.
+      </p>
+      <ol class="n__open">
+        {OPEN_QUESTIONS.map((q) => <li>{q}</li>)}
+      </ol>
+
+      <h2 class="n__h2">Medizinische Texte</h2>
+      <p>
+        Die allgemeinen Hintergründe zu Vorsorge, Zahnersatz und Zahnentfernung sind in
+        eigenen Worten nach den Patienteninformationen der Kassenzahnärztlichen
+        Bundesvereinigung zusammengefasst. Es werden keine Diagnosen gestellt, keine
+        Ergebnisse zugesagt und keine praxiseigenen Abläufe, Dauern oder Preise beschrieben.
+      </p>
+      <p>
+        Vor einer offiziellen Veröffentlichung sind sämtliche medizinischen Texte fachlich
+        durch Dr. Marijan zu prüfen und freizugeben.
+      </p>
+      <ul class="n__srclist">
+        <li><a href="https://www.kzbv.de/patienten/medizinische-infos/vorsorge/" rel="noopener noreferrer nofollow" target="_blank">KZBV – Vorsorge</a></li>
+        <li><a href="https://www.kzbv.de/patienten/medizinische-infos/zahnersatz/" rel="noopener noreferrer nofollow" target="_blank">KZBV – Zahnersatz</a></li>
+        <li><a href="https://www.kzbv.de/patienten/medizinische-infos/zahnextraktion/" rel="noopener noreferrer nofollow" target="_blank">KZBV – Zahnextraktion</a></li>
+        <li><a href={PRACTICE.emergencyUrl} rel="noopener noreferrer nofollow" target="_blank">KZVB – Zahnärztlicher Notdienst in Bayern</a></li>
+      </ul>
+
+      <h2 class="n__h2">Recht</h2>
+      <p>
+        Impressum, Datenschutzerklärung, Kammerzugehörigkeit, Berufsbezeichnung samt
+        verleihendem Staat und die berufsrechtlichen Angaben fehlen bewusst. Sie wurden nicht
+        erfunden und müssen von der Praxis beigebracht werden, bevor der Auftritt öffentlich
+        erreichbar ist.
+      </p>
+    </div></div>
+  </section>
+</Base>
+
+<style>
+  .n__wrap { max-width: 46rem; }
+  .n__h2 {
+    font-size: var(--step-2);
+    margin: var(--sp-6) 0 var(--sp-3);
+    padding-top: var(--sp-3);
+    border-top: 1px solid var(--rule);
+    max-width: 26ch;
+  }
+  .n__h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+  .n__lede { font-size: var(--step-1); line-height: 1.55; color: var(--ink-70); }
+  .n__wrap p + p { margin-top: 0.9rem; }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.875em;
+    background: var(--soft-grey);
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+  }
+
+  .n__flags { list-style: none; display: grid; gap: 0.8rem; margin-top: var(--sp-3); }
+  .n__flags li {
+    position: relative;
+    padding-left: 1.5rem;
+    font-size: var(--step--1);
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .n__flags li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0.68em;
+    width: 0.7rem; height: 1px;
+    background: var(--accent);
+  }
+  .n__flags strong { color: var(--fg); font-weight: 500; }
+  .n__inline { color: var(--accent); text-underline-offset: 3px; }
+
+  .ledger { margin-top: var(--sp-4); border-top: 1px solid var(--rule); font-size: 0.875rem; }
+  .ledger__head {
+    display: none;
+    font-size: 0.6875rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .ledger__row {
+    display: grid;
+    gap: 0.5rem;
+    padding: var(--sp-3) 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .ledger__claim { margin: 0; font-size: 0.9375rem; line-height: 1.5; max-width: none; }
+  .ledger__note { margin: 0.4rem 0 0; font-size: 0.8125rem; color: var(--ink-55); line-height: 1.55; max-width: none; }
+  .ledger__src ul { list-style: none; display: grid; gap: 0.3rem; }
+  .ledger__src a { font-size: 0.8125rem; color: var(--muted); text-underline-offset: 3px; }
+  .ledger__src a:hover { color: var(--accent); }
+  .chip {
+    display: inline-block;
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    border: 1px solid currentColor;
+  }
+  .chip--high { color: var(--teal-deep); }
+  .chip--medium { color: #8a6a2f; }
+  .chip--low { color: var(--ink-55); }
+  @media (min-width: 48rem) {
+    .ledger__head, .ledger__row {
+      grid-template-columns: minmax(0, 1fr) 9rem 5.5rem;
+      gap: var(--sp-3);
+      align-items: start;
+    }
+    .ledger__head { display: grid; }
+  }
+
+  .assets { margin-top: var(--sp-4); border-top: 1px solid var(--rule); }
+  .assets__row {
+    display: grid;
+    gap: 0.4rem;
+    padding: var(--sp-3) 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .assets__name { margin: 0; font-weight: 500; font-size: 0.9375rem; }
+  .assets__file { margin: 0.25rem 0 0; font-size: 0.8125rem; }
+  .assets__prov { margin: 0; font-size: 0.875rem; color: var(--fg); }
+  .assets__note { margin: 0.3rem 0 0; font-size: 0.8125rem; color: var(--ink-55); line-height: 1.55; max-width: none; }
+  @media (min-width: 48rem) {
+    .assets__row { grid-template-columns: minmax(0, 12rem) minmax(0, 1fr); gap: var(--sp-4); }
+  }
+
+  .n__open { display: grid; gap: 0.55rem; padding-left: 1.3rem; margin-top: var(--sp-3); }
+  .n__open li { font-size: var(--step--1); color: var(--muted); padding-left: 0.3rem; }
+
+  .n__srclist { list-style: none; display: grid; gap: 0.5rem; margin-top: var(--sp-3); }
+  .n__srclist a { font-size: var(--step--1); color: var(--muted); text-underline-offset: 3px; }
+  .n__srclist a:hover { color: var(--accent); }
+</style>

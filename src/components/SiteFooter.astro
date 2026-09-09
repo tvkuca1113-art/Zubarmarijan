@@ -1,0 +1,54 @@
+---
+import { PRACTICE } from '../data/practice';
+import { TREATMENT_PAGES } from '../data/treatments';
+const year = new Date().getFullYear();
+---
+<footer class="ftr">
+  <div class="shell">
+    <div class="ftr__grid">
+      <div>
+        <p class="ftr__brand-name">Dr. Hrvoje Marijan</p>
+        <p class="ftr__brand-role">Zahnarzt · {PRACTICE.district}</p>
+        <address class="ftr__addr" style="margin-top: 1.25rem;">
+          {PRACTICE.street}<br />
+          {PRACTICE.postalCode} {PRACTICE.city}
+        </address>
+        <p style="margin-top: 1rem;">
+          <a class="ftr__phone" href={PRACTICE.phoneHref}>{PRACTICE.phoneDisplay}</a>
+        </p>
+      </div>
+
+      <div>
+        <h2 class="ftr__h">Behandlungen</h2>
+        <ul class="ftr__list">
+          <li><a href="/behandlungen/">Übersicht &amp; Untersuchung</a></li>
+          {TREATMENT_PAGES.map((t) => <li><a href={`/${t.slug}/`}>{t.nav}</a></li>)}
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="ftr__h">Praxis</h2>
+        <ul class="ftr__list">
+          <li><a href="/praxis/">Über die Praxis</a></li>
+          <li><a href="/kontakt/">Kontakt &amp; Anfahrt</a></li>
+          <li><a href="/hr/" lang="hr">Informacije na hrvatskom</a></li>
+          <li>
+            <a href={PRACTICE.instagram} rel="noopener noreferrer" target="_blank">
+              Instagram {PRACTICE.instagramHandle}
+            </a>
+          </li>
+          <li><a href="/hinweise/">Hinweise zum Entwurf</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ftr__base">
+      <p style="margin:0;">© {year} {PRACTICE.practiceName}</p>
+      <p style="margin:0; max-width: 46rem;">
+        Privater Gestaltungsentwurf. Kein offizieller Auftritt der Praxis.
+        Impressum und Datenschutzerklärung folgen mit der Freigabe –
+        <a href="/hinweise/" style="text-decoration: underline;">Details</a>.
+      </p>
+    </div>
+  </div>
+</footer>

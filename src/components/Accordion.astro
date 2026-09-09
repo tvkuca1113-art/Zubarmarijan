@@ -1,0 +1,76 @@
+---
+import type { FaqItem } from '../data/faq';
+interface Props { items: FaqItem[]; idPrefix?: string; }
+const { items, idPrefix = 'faq' } = Astro.props;
+---
+<div class="acc">
+  {items.map((item) => (
+    <details class="acc__item" name={idPrefix}>
+      <summary class="acc__summary">
+        <span class="acc__q">{item.q}</span>
+        <span class="acc__sign" aria-hidden="true"><i></i><i></i></span>
+      </summary>
+      <div class="acc__body">
+        {item.a.map((p) => <p>{p}</p>)}
+      </div>
+    </details>
+  ))}
+</div>
+
+<style>
+  .acc { border-top: 1px solid var(--rule); }
+  .acc__item { border-bottom: 1px solid var(--rule); }
+
+  .acc__summary {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--sp-3);
+    padding: 1.35rem 0;
+    cursor: pointer;
+    list-style: none;
+    min-height: 3.25rem;
+  }
+  .acc__summary::-webkit-details-marker { display: none; }
+  .acc__summary:focus-visible { box-shadow: var(--focus); border-radius: 3px; }
+
+  .acc__q {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    line-height: 1.25;
+    letter-spacing: -0.012em;
+    text-wrap: balance;
+  }
+
+  .acc__sign {
+    flex: none;
+    position: relative;
+    width: 1.35rem;
+    height: 1.35rem;
+    margin-top: 0.35rem;
+  }
+  .acc__sign i {
+    position: absolute;
+    inset: 50% 0 auto 0;
+    height: 1px;
+    background: var(--accent);
+    transition: transform 340ms var(--ease), opacity 340ms var(--ease);
+  }
+  .acc__sign i:last-child { transform: rotate(90deg); }
+  .acc__item[open] .acc__sign i:last-child { transform: rotate(0deg); opacity: 0; }
+
+  .acc__body { padding-bottom: 1.5rem; max-width: 44rem; }
+  .acc__body p { color: var(--muted); }
+  .acc__body p + p { margin-top: 0.85rem; }
+
+  /* The panel slides open where the browser supports it and simply appears where
+     it does not. Suppressed entirely under reduced-motion by the global rule. */
+  @supports (interpolate-size: allow-keywords) {
+    .acc__item::details-content {
+      block-size: 0;
+      overflow: hidden;
+      transition: block-size 380ms var(--ease), content-visibility 380ms allow-discrete;
+    }
+    .acc__item[open]::details-content { block-size: auto; }
+  }
+</style>
