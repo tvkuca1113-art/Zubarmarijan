@@ -328,7 +328,11 @@ const steps = [
       <div class="anfahrt">
         <div class="anfahrt__media">
           <Figure slot="entrance" />
-          {BODY_STREET_LANDMARK_CONFIRMED && <p class="anfahrt__caption">{BODY_STREET_CAPTION}</p>}
+          <p class="anfahrt__caption">
+            {BODY_STREET_LANDMARK_CONFIRMED
+              ? BODY_STREET_CAPTION
+              : 'Der Eingang zum Haus Kapuzinerstraße 11, mit dem blauen Hausnummernschild rechts über der Tür.'}
+          </p>
         </div>
         <div class="anfahrt__info">
           <address class="anfahrt__addr">
@@ -559,6 +563,7 @@ const steps = [
 
   /* --- 11 Anfahrt -------------------------------------------------------- */
   .anfahrt { display: grid; gap: var(--sp-5); }
+  .anfahrt__media { max-width: 24rem; }
   .anfahrt__caption { margin-top: 0.85rem; font-size: 0.875rem; color: var(--muted); }
   .anfahrt__addr { font-style: normal; font-size: var(--step-1); line-height: 1.62; }
   .anfahrt__phone { margin: var(--sp-3) 0 var(--sp-4); }
@@ -573,7 +578,7 @@ const steps = [
   .anfahrt__copy { margin-top: var(--sp-4); }
   .anfahrt__more { margin-top: var(--sp-4); }
   @media (min-width: 60rem) {
-    .anfahrt { grid-template-columns: minmax(0, 1fr) minmax(0, 0.88fr); column-gap: clamp(2.5rem, 1rem + 5vw, 5rem); align-items: start; }
+    .anfahrt { grid-template-columns: minmax(0, 24rem) minmax(0, 1fr); column-gap: clamp(2.5rem, 1rem + 5vw, 5rem); align-items: start; }
   }
 
   /* --- 12 Abschluss ------------------------------------------------------ */

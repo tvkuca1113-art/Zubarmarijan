@@ -46,23 +46,20 @@ npm run dev        # http://localhost:4321
 
 ## Bilder einsetzen
 
-Der Entwurf sieht fünf Bildplätze vor. Solange eine Datei fehlt, rendert
-`src/components/Figure.astro` an derselben Stelle und **im selben
-Seitenverhältnis** eine gestaltete Fläche. Das Layout ist mit und ohne Foto
-identisch, es verschiebt sich beim Einsetzen nichts.
-
-Originale nach `public/images/source/` legen — Endung beliebig
-(`.jpg`, `.png`, `.webp`, `.tif`):
+Alle fünf Bilder liegen bei und sind eingebunden. Die Master stehen in
+`vendor/images/` und werden **nicht** ausgeliefert; im Build landen nur die
+Varianten aus `public/images/derived/`.
 
 | Datei | Verwendung | Seitenverhältnis |
 |---|---|---|
 | `doctor-portrait` | Hero der Startseite | 4:5 |
 | `welcome-conversation` | Abschnitt „Gut informiert. Gut aufgehoben." | 3:2 |
-| `cleaning-still-life` | Professionelle Zahnreinigung | 1:1 |
-| `ceramic-crown` | Zahnersatz (dunkler Abschnitt) | 4:3 |
-| `practice-entrance` | Kontakt & Anfahrt | 3:2 |
+| `cleaning-still-life` | Professionelle Zahnreinigung | 4:5 |
+| `ceramic-crown` | Zahnersatz (dunkler Abschnitt) | 3:2 |
+| `practice-entrance` | Kontakt & Anfahrt | 4:5 |
 
-Dann:
+Ein Bild austauschen: Datei in `vendor/images/` ersetzen (Endung
+beliebig), dann:
 
 ```bash
 npm run assets && npm run build
@@ -71,7 +68,12 @@ npm run assets && npm run build
 Das Skript schreibt AVIF-, WebP- und JPEG-Varianten nach
 `public/images/derived/` und hinterlegt die echten Maße in
 `src/data/asset-manifest.json`. `Figure.astro` liest dieses Manifest und liefert
-ab dann `<picture>` mit `srcset`, `sizes` und expliziten Abmessungen aus.
+`<picture>` mit `srcset`, `sizes` und expliziten Abmessungen aus.
+
+Weicht das neue Bild im Seitenverhältnis ab, den Wert `ratio` des Platzes in
+`src/data/assets.ts` mit anpassen — dann wird nichts beschnitten. Fehlt eine
+Datei ganz, rendert `Figure.astro` an derselben Stelle eine gestaltete Fläche im
+selben Seitenverhältnis, sodass das Layout unverändert bleibt.
 
 Herkunft und Rechte der Bilder: **[docs/ASSETS.md](docs/ASSETS.md)**.
 

@@ -1,8 +1,8 @@
 /**
  * Responsive image pipeline.
  *
- * Reads every source photograph from public/images/source/, writes AVIF, WebP and
- * JPEG derivatives to public/images/derived/, and records the real intrinsic size
+ * Reads every source photograph from vendor/images/ (masters, never served), writes
+ * AVIF, WebP and JPEG derivatives to public/images/derived/, and records the size
  * of each one in src/data/asset-manifest.json.
  *
  * The manifest is what the <Figure> component reads. A slot with no entry renders
@@ -14,7 +14,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
 
-const SRC_DIR = 'public/images/source';
+const SRC_DIR = 'vendor/images';
 const OUT_DIR = 'public/images/derived';
 const MANIFEST = 'src/data/asset-manifest.json';
 

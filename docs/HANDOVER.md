@@ -11,7 +11,7 @@ verbessert.
 | A2 | **Impressum** nach § 5 DDG: Name, Anschrift, Kontakt, Berufsbezeichnung samt verleihendem Staat, zuständige Zahnärztekammer und KZV, berufsrechtliche Regelungen und wo sie einsehbar sind, ggf. USt-IdNr. | Gesetzlich vorgeschrieben, nichts davon wurde erfunden |
 | A3 | **Datenschutzerklärung** und benannte Kontaktstelle | Gesetzlich vorgeschrieben |
 | A4 | **Fachliche Freigabe aller medizinischen Texte** | Die Texte sind allgemein und quellenbasiert, aber ungeprüft |
-| A5 | **Schriftliche Bildfreigabe** und möglichst eigene Fotos | Für die retuschierten Vorlagen liegt keine Nutzungserlaubnis vor |
+| A5 | **Schriftliche Bildfreigabe** für Porträt und Eingang | Beide Bilder liegen vor, sind aber retuschiert und von der Praxis nicht freigegeben |
 | A6 | **Die tatsächliche Domain** | Für Canonical-URLs, Sitemap und Strukturdaten |
 | A7 | **Aktuelle Sprechzeiten** | Werden derzeit bewusst nirgends genannt |
 
@@ -27,7 +27,7 @@ verbessert.
 | B6 | **Welche Sprachen im Patientengespräch angeboten werden** | Macht aus dem Sprachsignal eine belastbare Aussage auf `/` und `/hr/` |
 | B7 | Vollständiges Leistungsverzeichnis | Aktuell nur die vier belegten Bereiche |
 | B8 | Barrierefreiheit, Parkmöglichkeiten, nächste Haltestelle | Fehlt bewusst auf `/kontakt/` |
-| B9 | **Trifft „direkt neben BODY STREET" weiterhin zu?** | `BODY_STREET_LANDMARK_CONFIRMED = true` in `src/data/assets.ts` schaltet die Bildunterschrift frei |
+| B9 | **Trifft „direkt neben BODY STREET" weiterhin zu?** | Das Eingangsfoto zeigt die Nachbarschaft, die Aktualität ist offen. `BODY_STREET_LANDMARK_CONFIRMED = true` in `src/data/assets.ts` schaltet die Bildunterschrift frei |
 | B10 | Bestätigung, dass gesetzlich und privat Versicherte behandelt werden | Ersetzt den Zusatz „Verzeichnisangabe" durch eine klare Aussage |
 
 ## C · Schritte beim Launch

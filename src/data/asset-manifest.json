@@ -1,1 +1,94 @@
-{}
+{
+  "portrait": {
+    "base": "doctor-portrait",
+    "widths": [
+      420,
+      640,
+      900,
+      1122
+    ],
+    "intrinsicWidth": 1122,
+    "intrinsicHeight": 1402,
+    "formats": [
+      "avif",
+      "webp",
+      "jpg"
+    ],
+    "sourceFile": "doctor-portrait.png",
+    "generated": "2026-09-09"
+  },
+  "welcome": {
+    "base": "welcome-conversation",
+    "widths": [
+      420,
+      640,
+      900,
+      1200,
+      1536
+    ],
+    "intrinsicWidth": 1536,
+    "intrinsicHeight": 1024,
+    "formats": [
+      "avif",
+      "webp",
+      "jpg"
+    ],
+    "sourceFile": "welcome-conversation.png",
+    "generated": "2026-09-09"
+  },
+  "stillLife": {
+    "base": "cleaning-still-life",
+    "widths": [
+      420,
+      640,
+      900,
+      1122
+    ],
+    "intrinsicWidth": 1122,
+    "intrinsicHeight": 1402,
+    "formats": [
+      "avif",
+      "webp",
+      "jpg"
+    ],
+    "sourceFile": "cleaning-still-life.png",
+    "generated": "2026-09-09"
+  },
+  "crown": {
+    "base": "ceramic-crown",
+    "widths": [
+      420,
+      640,
+      900,
+      1200,
+      1536
+    ],
+    "intrinsicWidth": 1536,
+    "intrinsicHeight": 1024,
+    "formats": [
+      "avif",
+      "webp",
+      "jpg"
+    ],
+    "sourceFile": "ceramic-crown.png",
+    "generated": "2026-09-09"
+  },
+  "entrance": {
+    "base": "practice-entrance",
+    "widths": [
+      420,
+      640,
+      900,
+      1122
+    ],
+    "intrinsicWidth": 1122,
+    "intrinsicHeight": 1402,
+    "formats": [
+      "avif",
+      "webp",
+      "jpg"
+    ],
+    "sourceFile": "practice-entrance.png",
+    "generated": "2026-09-09"
+  }
+}

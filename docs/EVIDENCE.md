@@ -79,8 +79,11 @@ erscheinen nirgends als aktuelles Angebot.
 ## Ausdrücklich offen
 
 Der Hinweis, der Eingang liege unmittelbar neben **BODY STREET**, stammt aus
-einem Praxis-Beitrag und war 2026 nicht unabhängig zu bestätigen. Er ist
-deshalb aus der Anfahrtsbeschreibung herausgehalten. Die Formulierung liegt
+einem Praxis-Beitrag. Das vom Projektinhaber gelieferte Eingangsfoto zeigt die
+Tür der Kapuzinerstraße 11 tatsächlich direkt neben dem Schaufenster von BODY
+STREET, was den Punkt stützt. Belegt ist damit aber nicht, ob die Nachbarschaft
+**heute** noch besteht; das Bild ist zudem retuschiert und von der Praxis nicht
+freigegeben. Die Aussage bleibt deshalb aus der Anfahrtsbeschreibung heraus. Die Formulierung liegt
 fertig in `src/data/assets.ts`; nach Bestätigung durch die Praxis genügt:
 
 ```ts
@@ -88,7 +91,8 @@ export const BODY_STREET_LANDMARK_CONFIRMED = true;
 ```
 
 Danach erscheint die Bildunterschrift „Unser Eingang: Kapuzinerstraße 11, direkt
-neben BODY STREET." unter dem Eingangsfoto auf `/` und `/kontakt/`.
+neben BODY STREET." unter dem Eingangsfoto auf `/` und `/kontakt/`. Bis dahin
+steht dort eine Unterschrift, die nur beschreibt, was auf dem Bild zu sehen ist.
 
 ## Medizinische Hintergründe
 

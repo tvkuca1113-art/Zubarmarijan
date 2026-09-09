@@ -2,7 +2,7 @@
  * The five image slots of the concept.
  *
  * Each slot names the source file the practice (or the project owner) drops into
- * `public/images/source/`. `npm run assets` then generates responsive AVIF/WebP/JPEG
+ * `vendor/images/` (masters, never served). `npm run assets` then generates AVIF/WebP/JPEG
  * derivatives and writes `src/data/asset-manifest.json`.
  *
  * Until a source file exists, the <Figure> component renders a designed plate at
@@ -17,7 +17,7 @@ export type Provenance =
 
 export interface ImageSlot {
   key: string;
-  /** Base filename (without extension) expected in public/images/source/. */
+  /** Base filename (without extension) expected in vendor/images/. */
   file: string;
   /** Intrinsic aspect ratio the layout reserves. */
   ratio: [number, number];
@@ -45,8 +45,8 @@ export const IMAGE_SLOTS: Record<string, ImageSlot> = {
     file: 'doctor-portrait',
     ratio: [4, 5],
     alt: 'Dr. Hrvoje Marijan in grauer Praxiskleidung, neben einem weißen Schrank vor Holzfenstern.',
-    widths: [420, 640, 860, 1100],
-    sizes: '(max-width: 900px) 92vw, 40vw',
+    widths: [420, 640, 900, 1122],
+    sizes: '(max-width: 60rem) 92vw, 26rem',
     provenance: 'retouched-practice-post',
     provenanceNote:
       'KI-retuschierter Ausschnitt aus einem öffentlichen Praxis-Post, mit rekonstruierten Bildbereichen. Demo-Asset, Freigabe der Praxis steht aus.',
@@ -58,9 +58,9 @@ export const IMAGE_SLOTS: Record<string, ImageSlot> = {
     key: 'welcome',
     file: 'welcome-conversation',
     ratio: [3, 2],
-    alt: 'Lächelnde Frau mit braunen Haaren in grauem Strickpullover vor hellem Hintergrund.',
-    widths: [560, 900, 1200, 1600],
-    sizes: '(max-width: 900px) 94vw, 52vw',
+    alt: 'Lächelnde Frau mit dunklen Haaren in dunkelgrauem Strickpullover vor einer hellen Wand.',
+    widths: [560, 900, 1200, 1536],
+    sizes: '(max-width: 60rem) 94vw, 52vw',
     provenance: 'ai-illustration',
     provenanceNote:
       'KI-generierte Illustration. Zeigt keine Patientin der Praxis und kein Behandlungsergebnis.',
@@ -70,10 +70,10 @@ export const IMAGE_SLOTS: Record<string, ImageSlot> = {
   stillLife: {
     key: 'stillLife',
     file: 'cleaning-still-life',
-    ratio: [1, 1],
-    alt: 'Zahnärztlicher Mundspiegel und elfenbeinfarbene Zahnbürste auf einem gefalteten weißen Handtuch.',
-    widths: [420, 640, 900],
-    sizes: '(max-width: 900px) 88vw, 34vw',
+    ratio: [4, 5],
+    alt: 'Zahnärztlicher Mundspiegel und elfenbeinfarbene Zahnbürste auf einem gefalteten weißen Handtuch, auf blaugrauem Untergrund.',
+    widths: [420, 640, 900, 1122],
+    sizes: '(max-width: 56rem) 88vw, 22rem',
     provenance: 'ai-illustration',
     provenanceNote:
       'KI-generiertes Stillleben. Illustration, kein Beleg für die tatsächliche Ausstattung der Praxis.',
@@ -83,10 +83,10 @@ export const IMAGE_SLOTS: Record<string, ImageSlot> = {
   crown: {
     key: 'crown',
     file: 'ceramic-crown',
-    ratio: [4, 3],
-    alt: 'Keramische Krone für einen Backenzahn auf einem dunklen Sockel.',
-    widths: [520, 800, 1100],
-    sizes: '(max-width: 900px) 90vw, 44vw',
+    ratio: [3, 2],
+    alt: 'Keramische Krone für einen Backenzahn auf einem runden Steinsockel vor dunklem Hintergrund.',
+    widths: [520, 800, 1100, 1536],
+    sizes: '(max-width: 60rem) 90vw, 44vw',
     provenance: 'ai-illustration',
     provenanceNote:
       'KI-generierte Illustration eines keramischen Zahnersatzes. Kein dokumentierter Patientenfall und keine in der Praxis gefertigte Arbeit.',
@@ -96,10 +96,10 @@ export const IMAGE_SLOTS: Record<string, ImageSlot> = {
   entrance: {
     key: 'entrance',
     file: 'practice-entrance',
-    ratio: [3, 2],
-    alt: 'Dunkle Eingangstür des Hauses Kapuzinerstraße 11 mit blauem Hausnummernschild.',
-    widths: [560, 900, 1200],
-    sizes: '(max-width: 900px) 94vw, 46vw',
+    ratio: [4, 5],
+    alt: 'Dunkle zweiflügelige Eingangstür des Hauses Kapuzinerstraße 11, daneben das blaue Hausnummernschild und das Schaufenster des Nachbarbetriebs.',
+    widths: [420, 640, 900, 1122],
+    sizes: '(max-width: 60rem) 94vw, 26rem',
     provenance: 'retouched-practice-post',
     provenanceNote:
       'KI-retuschiertes Bild aus einem öffentlichen Praxis-Post, mit rekonstruierten Bildbereichen. Demo-Asset, Freigabe der Praxis steht aus.',

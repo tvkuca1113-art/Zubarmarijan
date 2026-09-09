@@ -18,7 +18,7 @@ gegen `dist/`, ausgeliefert über einen lokalen statischen Server.
 |---|---|
 | Horizontaler Überlauf | keiner auf 30 Seiten-/Breiten-Kombinationen |
 | Genau eine `h1` je Seite | erfüllt |
-| Fehlende oder gebrochene Bilder | keine |
+| Fehlende oder gebrochene Bilder | keine, nach vollständigem Durchscrollen jeder Seite |
 | `tel:`-Ziele | alle 10 Seiten, ausnahmslos `tel:+4989537901` |
 | `noindex, nofollow` | auf allen 10 Seiten gesetzt |
 | Konsolenfehler | keine — mit einer Ausnahme, siehe unten |
@@ -71,6 +71,22 @@ verwendeten Schnitte (400/500/600) verfügbar.
 Erreicht durch Zeichen-Subsetting plus Beschneiden der Variationsachsen
 (`wght` auf 400–600, Newsreaders `opsz` auf 30 fixiert). Die Originale liegen
 unter `vendor/fonts/` und werden nicht ausgeliefert.
+
+## Bilder
+
+Alle fünf Plätze liefern AVIF mit WebP- und JPEG-Rückfall, `srcset`, `sizes`
+sowie `width` und `height` aus den echten Maßen. Nur das Hero-Porträt lädt
+`eager` mit `fetchpriority="high"`, alles Übrige `lazy`.
+
+Da die Bildplätze an die gelieferten Seitenverhältnisse angepasst wurden, wird
+kein Bild beschnitten. Im Browser geprüft: Chromium wählt AVIF und die
+passende Breite je Ansichtsgröße, etwa 900 px bei 390 px Breite und doppelter
+Pixeldichte, 420 px bei 1440 px und einfacher Dichte.
+
+| erste Ansicht, vor dem Scrollen | Gewicht |
+|---|---|
+| 390 px, Pixeldichte 2 | 169 KB |
+| 1440 px, Pixeldichte 1 | 172 KB |
 
 ## Auslieferungsgrößen
 
@@ -132,9 +148,9 @@ Screenshots auf 390, 768 und 1440 px gesichtet und daraufhin korrigiert:
 - **Nicht in der Praxis angerufen**, keine Nachricht gesendet, keine
   Testbuchung ausgelöst. Die Telefonnummer stammt ausschließlich aus
   öffentlichen Verzeichnissen.
-- **Keine echten Fotos im Build.** Alle fünf Bildplätze zeigen gestaltete
-  Flächen, weil die Bilddateien in dieser Arbeitsumgebung nicht vorlagen
-  (siehe `docs/ASSETS.md`).
+- **Bilder sind eingebunden, aber nicht freigegeben.** Alle fünf Fotos liegen im
+  Build. Porträt und Eingang sind retuschierte Vorlagen ohne Nutzungserlaubnis
+  der Praxis, die drei übrigen sind KI-Illustrationen (siehe `docs/ASSETS.md`).
 - **Ältere Browser** wurden nicht getestet. `::details-content` und
   `interpolate-size` stehen hinter `@supports`; ohne Unterstützung öffnet das
   Akkordeon ohne Animation.
