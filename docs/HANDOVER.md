@@ -10,7 +10,7 @@ verbessert.
 | A1 | **Freigabe des Entwurfs** durch Dr. Marijan | Der Auftritt ist unbeauftragt |
 | A2 | **Impressum** nach § 5 DDG: Name, Anschrift, Kontakt, Berufsbezeichnung samt verleihendem Staat, zuständige Zahnärztekammer und KZV, berufsrechtliche Regelungen und wo sie einsehbar sind, ggf. USt-IdNr. | Gesetzlich vorgeschrieben, nichts davon wurde erfunden |
 | A3 | **Datenschutzerklärung** und benannte Kontaktstelle | Gesetzlich vorgeschrieben |
-| A4 | **Fachliche Freigabe aller medizinischen Texte** | Die Texte sind allgemein und quellenbasiert, aber ungeprüft |
+| A4 | **Fachliche Freigabe aller medizinischen Texte** | Allgemein und quellenbasiert, aber ungeprüft — einschließlich der drei Erklärungen in der interaktiven Zahn-Darstellung und der vereinfachten Anatomie des Modells |
 | A5 | **Schriftliche Bildfreigabe** für Porträt und Eingang | Beide Bilder liegen vor, sind aber retuschiert und von der Praxis nicht freigegeben |
 | A6 | **Die tatsächliche Domain** | Für Canonical-URLs, Sitemap und Strukturdaten |
 | A7 | **Aktuelle Sprechzeiten** | Werden derzeit bewusst nirgends genannt |
@@ -24,6 +24,8 @@ verbessert.
 | B3 | Wird die Praxisnummer für WhatsApp genutzt? | Derzeit ausgeschlossen |
 | B4 | Werdegang, Studium, Tätigkeitsschwerpunkte | Füllt den offenen Abschnitt auf `/praxis/` |
 | B5 | Team | Eigener Abschnitt, derzeit nicht vorhanden |
+| B11 | **Ein echtes Praxis- oder Gesprächsfoto** | Besetzt die vierte Bildrolle, die derzeit typografisch gelöst ist |
+| B12 | Echte, freigegebene Patientenstimmen | Nur mit Zustimmung und Zuordnung; sonst bleibt das Modul weg |
 | B6 | **Welche Sprachen im Patientengespräch angeboten werden** | Macht aus dem Sprachsignal eine belastbare Aussage auf `/` und `/hr/` |
 | B7 | Vollständiges Leistungsverzeichnis | Aktuell nur die vier belegten Bereiche |
 | B8 | Barrierefreiheit, Parkmöglichkeiten, nächste Haltestelle | Fehlt bewusst auf `/kontakt/` |

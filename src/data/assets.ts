@@ -54,6 +54,10 @@ export const IMAGE_SLOTS: Record<string, ImageSlot> = {
     plateLabel: 'Porträt',
     priority: true,
   },
+  /**
+   * Retired from the site in the 2026-09 redesign: an anonymous smiling face is
+   * not evidence about this practice. The file stays for reference only.
+   */
   welcome: {
     key: 'welcome',
     file: 'welcome-conversation',
@@ -80,6 +84,10 @@ export const IMAGE_SLOTS: Record<string, ImageSlot> = {
     plate: 'instrument',
     plateLabel: 'Prophylaxe',
   },
+  /**
+   * Retired from the site in the 2026-09 redesign: the interactive tooth section
+   * explains crowns instead. The file stays for reference only.
+   */
   crown: {
     key: 'crown',
     file: 'ceramic-crown',

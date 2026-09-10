@@ -119,7 +119,7 @@ const confidenceLabel: Record<string, string> = {
           <div class="assets__row">
             <div>
               <p class="assets__name">{slot.plateLabel}</p>
-              <p class="assets__file"><code>{slot.file}</code></p>
+              <p class="assets__file fine"><code>{slot.file}</code></p>
             </div>
             <div>
               <p class="assets__prov">{provenanceLabel[slot.provenance]}</p>
@@ -176,19 +176,19 @@ const confidenceLabel: Record<string, string> = {
 <style>
   .n__wrap { max-width: 46rem; }
   .n__h2 {
-    font-size: var(--step-2);
+    font-size: var(--fs-h3);
     margin: var(--sp-6) 0 var(--sp-3);
     padding-top: var(--sp-3);
     border-top: 1px solid var(--rule);
     max-width: 26ch;
   }
   .n__h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
-  .n__lede { font-size: var(--step-1); line-height: 1.55; color: var(--ink-70); }
+  .n__lede { font-size: var(--fs-lede); line-height: 1.55; color: var(--muted); }
   .n__wrap p + p { margin-top: 0.9rem; }
   code {
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     font-size: 0.875em;
-    background: var(--soft-grey);
+    background: var(--surface);
     padding: 0.1em 0.35em;
     border-radius: 3px;
   }
@@ -197,7 +197,7 @@ const confidenceLabel: Record<string, string> = {
   .n__flags li {
     position: relative;
     padding-left: 1.5rem;
-    font-size: var(--step--1);
+    font-size: var(--fs-sm);
     color: var(--muted);
     line-height: 1.6;
   }
@@ -211,7 +211,7 @@ const confidenceLabel: Record<string, string> = {
   .n__flags strong { color: var(--fg); font-weight: 500; }
   .n__inline { color: var(--accent); text-underline-offset: 3px; }
 
-  .ledger { margin-top: var(--sp-4); border-top: 1px solid var(--rule); font-size: 0.875rem; }
+  .ledger { margin-top: var(--sp-4); border-top: 1px solid var(--rule); font-size: var(--fs-sm); }
   .ledger__head {
     display: none;
     font-size: 0.6875rem;
@@ -227,10 +227,10 @@ const confidenceLabel: Record<string, string> = {
     padding: var(--sp-3) 0;
     border-bottom: 1px solid var(--rule);
   }
-  .ledger__claim { margin: 0; font-size: 0.9375rem; line-height: 1.5; max-width: none; }
-  .ledger__note { margin: 0.4rem 0 0; font-size: 0.8125rem; color: var(--ink-55); line-height: 1.55; max-width: none; }
+  .ledger__claim { margin: 0; font-size: var(--fs-sm); line-height: 1.5; max-width: none; }
+  .ledger__note { margin: 0.4rem 0 0; font-size: var(--fs-fine); color: var(--muted); line-height: 1.55; max-width: none; }
   .ledger__src ul { list-style: none; display: grid; gap: 0.3rem; }
-  .ledger__src a { font-size: 0.8125rem; color: var(--muted); text-underline-offset: 3px; }
+  .ledger__src a { font-size: var(--fs-fine); color: var(--muted); text-underline-offset: 3px; }
   .ledger__src a:hover { color: var(--accent); }
   .chip {
     display: inline-block;
@@ -241,9 +241,9 @@ const confidenceLabel: Record<string, string> = {
     border-radius: 2px;
     border: 1px solid currentColor;
   }
-  .chip--high { color: var(--teal-deep); }
+  .chip--high { color: var(--accent-ink); }
   .chip--medium { color: #8a6a2f; }
-  .chip--low { color: var(--ink-55); }
+  .chip--low { color: var(--muted); }
   @media (min-width: 48rem) {
     .ledger__head, .ledger__row {
       grid-template-columns: minmax(0, 1fr) 9rem 5.5rem;
@@ -260,18 +260,18 @@ const confidenceLabel: Record<string, string> = {
     padding: var(--sp-3) 0;
     border-bottom: 1px solid var(--rule);
   }
-  .assets__name { margin: 0; font-weight: 500; font-size: 0.9375rem; }
-  .assets__file { margin: 0.25rem 0 0; font-size: 0.8125rem; }
-  .assets__prov { margin: 0; font-size: 0.875rem; color: var(--fg); }
-  .assets__note { margin: 0.3rem 0 0; font-size: 0.8125rem; color: var(--ink-55); line-height: 1.55; max-width: none; }
+  .assets__name { margin: 0; font-weight: 500; font-size: var(--fs-sm); }
+  .assets__file { margin: 0.25rem 0 0; font-size: var(--fs-fine); }
+  .assets__prov { margin: 0; font-size: var(--fs-sm); color: var(--fg); }
+  .assets__note { margin: 0.3rem 0 0; font-size: var(--fs-fine); color: var(--muted); line-height: 1.55; max-width: none; }
   @media (min-width: 48rem) {
     .assets__row { grid-template-columns: minmax(0, 12rem) minmax(0, 1fr); gap: var(--sp-4); }
   }
 
   .n__open { display: grid; gap: 0.55rem; padding-left: 1.3rem; margin-top: var(--sp-3); }
-  .n__open li { font-size: var(--step--1); color: var(--muted); padding-left: 0.3rem; }
+  .n__open li { font-size: var(--fs-sm); color: var(--muted); padding-left: 0.3rem; }
 
   .n__srclist { list-style: none; display: grid; gap: 0.5rem; margin-top: var(--sp-3); }
-  .n__srclist a { font-size: var(--step--1); color: var(--muted); text-underline-offset: 3px; }
+  .n__srclist a { font-size: var(--fs-sm); color: var(--muted); text-underline-offset: 3px; }
   .n__srclist a:hover { color: var(--accent); }
 </style>

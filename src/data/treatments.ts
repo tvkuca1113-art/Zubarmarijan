@@ -66,7 +66,7 @@ export const TREATMENTS: Treatment[] = [
         heading: 'Warum sich der Befund nicht vorwegnehmen lässt',
         paragraphs: [
           'Zwei Menschen mit derselben Beschwerde können unterschiedliche Befunde haben. Vorgeschichte, Zahnfleischsituation, vorhandene Füllungen oder Kronen, Medikamente und Gewohnheiten wirken alle mit hinein.',
-          'Aus diesem Grund finden Sie auf dieser Website keine Aussage darüber, welche Behandlung in Ihrem Fall angezeigt ist, wie lange sie dauert oder was sie kostet. Das lässt sich seriös erst nach einer Untersuchung sagen.',
+          'Deshalb lässt sich vorab nicht sagen, welche Behandlung in Ihrem Fall angezeigt ist, wie lange sie dauert oder was sie kostet. Das ergibt sich erst aus der Untersuchung.',
         ],
       },
       {
@@ -85,7 +85,7 @@ export const TREATMENTS: Treatment[] = [
       'Wie sieht die Nachsorge aus, und wann ist der nächste Termin sinnvoll?',
     ],
     clarify: [
-      'Aktuelle Sprechzeiten und die nächste freie Terminmöglichkeit',
+      'Die nächste freie Terminmöglichkeit',
       'Wie viel Zeit für einen Ersttermin eingeplant werden sollte',
       'Welche Unterlagen Sie zum ersten Termin mitbringen sollen',
     ],
@@ -134,7 +134,7 @@ export const TREATMENTS: Treatment[] = [
         heading: 'Kostenübernahme',
         paragraphs: [
           'Die PZR ist für gesetzlich Versicherte in der Regel keine Kassenleistung. Manche Krankenkassen beteiligen sich anteilig, die Regelungen unterscheiden sich jedoch deutlich voneinander und ändern sich.',
-          'Fragen Sie den aktuellen Umfang bitte bei Ihrer Krankenkasse und den konkreten Ablauf in der Praxis nach. Diese Website nennt bewusst keine Preise.',
+          'Fragen Sie den aktuellen Umfang bitte bei Ihrer Krankenkasse nach und besprechen Sie Ablauf und Kosten direkt in der Praxis.',
         ],
       },
     ],
@@ -146,7 +146,7 @@ export const TREATMENTS: Treatment[] = [
       'Beteiligt sich meine Krankenkasse – und was muss ich dafür einreichen?',
     ],
     clarify: [
-      'Ob und wann ein Termin zur professionellen Zahnreinigung möglich ist',
+      'Wann ein Termin zur professionellen Zahnreinigung möglich ist',
       'Wie viel Zeit dafür eingeplant wird',
       'Der konkrete Ablauf und die Kosten in dieser Praxis',
     ],
@@ -208,7 +208,7 @@ export const TREATMENTS: Treatment[] = [
     sources: [
       { label: 'KZBV – Zahnersatz', url: 'https://www.kzbv.de/patienten/medizinische-infos/zahnersatz/' },
     ],
-    imageSlot: 'crown',
+
   },
   {
     slug: 'zahnentfernung-muenchen',
@@ -229,7 +229,7 @@ export const TREATMENTS: Treatment[] = [
       {
         heading: 'Wie die Einschätzung zustande kommt',
         paragraphs: [
-          'Ob ein Zahn erhalten werden kann, hängt davon ab, wie viel tragfähige Substanz übrig ist, wie stabil der Zahn im Knochen verankert ist und ob eine Entzündung beherrschbar erscheint. Diese Beurteilung setzt eine Untersuchung voraus und lässt sich weder am Telefon noch über eine Website vornehmen.',
+          'Ob ein Zahn erhalten werden kann, hängt davon ab, wie viel tragfähige Substanz übrig ist, wie stabil der Zahn im Knochen verankert ist und ob eine Entzündung beherrschbar erscheint. Diese Beurteilung setzt eine Untersuchung voraus.',
           'Wenn Sie unsicher sind, ist das ein guter Grund für einen Termin – gerade dann, wenn Ihnen schon einmal gesagt wurde, ein Zahn sei nicht zu halten, und Sie das in Ruhe besprechen möchten.',
         ],
       },
@@ -251,7 +251,7 @@ export const TREATMENTS: Treatment[] = [
         heading: 'Akute Schmerzen',
         paragraphs: [
           'Bei akuten Beschwerden ist der direkte Anruf in der Praxis der schnellste Weg. Bitte schildern Sie am Telefon kurz, worum es geht.',
-          'Außerhalb der Sprechzeiten führt der zahnärztliche Notdienst der Kassenzahnärztlichen Vereinigung Bayerns weiter. Diese Praxis betreibt keinen eigenen Notdienst.',
+          'Außerhalb der Sprechzeiten führt der zahnärztliche Notdienst der Kassenzahnärztlichen Vereinigung Bayerns weiter.',
         ],
       },
     ],
@@ -263,7 +263,7 @@ export const TREATMENTS: Treatment[] = [
       'Was ist mit der Lücke – und bis wann sollte das entschieden sein?',
     ],
     clarify: [
-      'Ob bei akuten Beschwerden kurzfristig ein Termin möglich ist',
+      'Ob bei akuten Beschwerden kurzfristig etwas frei ist',
       'Welche Vorbereitung nötig ist, etwa bei blutverdünnenden Medikamenten',
       'Die Nachsorge und wer im Anschluss ansprechbar ist',
     ],

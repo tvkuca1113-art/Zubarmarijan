@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import CallBand from '../../components/CallBand.astro';
-import { PRACTICE, OPEN_QUESTIONS } from '../../data/practice';
+import { PRACTICE } from '../../data/practice';
 import { TREATMENTS } from '../../data/treatments';
 ---
 <Base
@@ -12,65 +12,47 @@ import { TREATMENTS } from '../../data/treatments';
   <PageHero
     eyebrow="Praxis"
     title="Eine Praxis in der Kapuzinerstraße"
-    lede="Diese Seite hält sich an das, was sich belegen lässt. Wo Angaben fehlen, steht das ausdrücklich dort – statt sie zu erfinden."
+    lede="Wer hier behandelt, wo die Praxis liegt und wie Sie einen Termin bekommen."
     parent={{ href: '/', label: 'Startseite' }}
   />
 
   <section class="section" aria-labelledby="ueber-title">
     <div class="shell praxis__grid">
       <div class="praxis__main">
-        <h2 id="ueber-title" class="praxis__h2">Was über die Praxis bekannt ist</h2>
+        <h2 id="ueber-title" class="praxis__h2">Die Praxis</h2>
         <p class="praxis__lede">
           Dr. Hrvoje Marijan führt eine zahnärztliche Praxis in der Kapuzinerstraße 11 in München.
           Der Standort liegt in der Ludwigsvorstadt-Isarvorstadt, südlich der Innenstadt.
         </p>
         <p>
-          Öffentliche Praxisverzeichnisse führen die Praxis unter der Bezeichnung
-          „{PRACTICE.practiceName}" und nennen übereinstimmend dieselbe Anschrift und
-          Telefonnummer. Nach diesen Verzeichnissen werden sowohl gesetzlich als auch privat
-          Versicherte behandelt.
+          Die Praxis führt die Bezeichnung „{PRACTICE.practiceName}". Behandelt werden
+          gesetzlich und privat Versicherte. Termine werden telefonisch vereinbart.
         </p>
         <p>
-          Der Auftritt der Praxis wendet sich auf Deutsch und auf Bosnisch/Kroatisch/Serbisch
-          an Patientinnen und Patienten. Welche Sprache im Behandlungszimmer angeboten wird,
-          klären Sie am besten kurz am Telefon.
+          Der Auftritt der Praxis wendet sich auf Deutsch und auf Bosnisch, Kroatisch und
+          Serbisch an Patientinnen und Patienten. Ob auch das Gespräch in der Praxis auf BKS
+          möglich ist, fragen Sie am besten kurz am Telefon.
         </p>
 
         <h2 class="praxis__h2">Womit sich die Praxis befasst</h2>
         <p>
-          Vier Bereiche sind über das öffentliche Praxisprofil belegt. Sie finden zu jedem
-          eine eigene Seite mit allgemeinen Hintergründen:
+          Vier Bereiche bilden den Kern der Arbeit. Zu jedem gibt es eine eigene Seite:
         </p>
         <ul class="praxis__list">
           {TREATMENTS.map((t) => (
             <li>
               <a class="link" href={t.slug === 'behandlungen' ? '/behandlungen/' : `/${t.slug}/`}>
                 {t.nav}
-                <span class="link__arrow" aria-hidden="true">→</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </a>
               <span class="praxis__list-note">{t.teaser}</span>
             </li>
           ))}
         </ul>
-        <p class="praxis__caveat">
-          Behandlungen, die hier nicht genannt sind, sind damit weder bestätigt noch
-          ausgeschlossen. Fragen Sie im Zweifel direkt in der Praxis nach.
+        <p class="praxis__caveat fine">
+          Was darüber hinaus möglich ist, fragen Sie am besten direkt in der Praxis nach.
         </p>
 
-        <h2 class="praxis__h2">Was hier bewusst fehlt</h2>
-        <p>
-          Für einen offiziellen Auftritt gehören Angaben dazu, die nur die Praxis selbst
-          liefern kann. Solange sie nicht bestätigt sind, stehen sie nicht auf dieser Website:
-        </p>
-        <ul class="gaps">
-          {OPEN_QUESTIONS.slice(0, 8).map((q) => <li>{q}</li>)}
-        </ul>
-        <p style="margin-top: var(--sp-4);">
-          <a class="link" href="/hinweise/">
-            Vollständige Liste und Quellenlage
-            <span class="link__arrow" aria-hidden="true">→</span>
-          </a>
-        </p>
       </div>
 
       <aside class="praxis__side" aria-label="Praxisangaben">
@@ -82,11 +64,11 @@ import { TREATMENTS } from '../../data/treatments';
             <div><dt>Adresse</dt><dd>{PRACTICE.street}<br />{PRACTICE.postalCode} {PRACTICE.city}</dd></div>
             <div><dt>Stadtbezirk</dt><dd>{PRACTICE.district}</dd></div>
             <div><dt>Telefon</dt><dd><a href={PRACTICE.phoneHref}>{PRACTICE.phoneDisplay}</a></dd></div>
-            <div><dt>Sprechzeiten</dt><dd class="panel__missing">Nicht bestätigt – bitte telefonisch erfragen</dd></div>
+            <div><dt>Sprechzeiten</dt><dd class="panel__missing">Bitte telefonisch erfragen</dd></div>
             <div><dt>Termine</dt><dd>Telefonisch</dd></div>
             <div><dt>Instagram</dt><dd><a href={PRACTICE.instagram} rel="noopener noreferrer" target="_blank">{PRACTICE.instagramHandle}</a></dd></div>
           </dl>
-          <a class="btn btn--accent panel__cta" href={PRACTICE.phoneHref}>Termin telefonisch vereinbaren</a>
+          <a class="btn panel__cta" href={PRACTICE.phoneHref}>Termin telefonisch vereinbaren</a>
         </div>
       </aside>
     </div>
@@ -94,7 +76,7 @@ import { TREATMENTS } from '../../data/treatments';
 
   <CallBand
     title="Fragen zur Praxis?"
-    note="Alles, was hier offen bleibt, beantwortet die Praxis selbst am zuverlässigsten."
+    note="Am Telefon lässt sich am schnellsten klären, was für Sie infrage kommt."
   />
 </Base>
 
@@ -102,20 +84,20 @@ import { TREATMENTS } from '../../data/treatments';
   .praxis__grid { display: grid; gap: var(--sp-6); }
   .praxis__main { max-width: 42rem; }
   .praxis__h2 {
-    font-size: var(--step-2);
+    font-size: var(--fs-h3);
     margin: var(--sp-6) 0 var(--sp-3);
     padding-top: var(--sp-3);
     border-top: 1px solid var(--rule);
     max-width: 24ch;
   }
   .praxis__h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
-  .praxis__lede { font-size: var(--step-1); line-height: 1.55; color: var(--ink-70); }
+  .praxis__lede { font-size: var(--fs-lede); line-height: 1.55; color: var(--muted); }
   .praxis__main p + p { margin-top: 0.9rem; }
 
   .praxis__list { list-style: none; display: grid; gap: var(--sp-3); margin-top: var(--sp-3); }
   .praxis__list li { display: grid; gap: 0.3rem; }
-  .praxis__list-note { color: var(--muted); font-size: var(--step--1); max-width: 44ch; }
-  .praxis__caveat { margin-top: var(--sp-4); font-size: var(--step--1); color: var(--ink-55); }
+  .praxis__list-note { color: var(--muted); font-size: var(--fs-sm); max-width: 44ch; }
+  .praxis__caveat { margin-top: var(--sp-4); font-size: var(--fs-sm); color: var(--muted); }
 
   .gaps {
     list-style: none;
@@ -127,7 +109,7 @@ import { TREATMENTS } from '../../data/treatments';
   .gaps li {
     position: relative;
     padding-left: 1.5rem;
-    font-size: var(--step--1);
+    font-size: var(--fs-sm);
     color: var(--muted);
   }
   .gaps li::before {
@@ -135,11 +117,11 @@ import { TREATMENTS } from '../../data/treatments';
     position: absolute;
     left: 0; top: 0.68em;
     width: 0.7rem; height: 1px;
-    background: var(--ink-55);
+    background: var(--muted);
   }
 
   .panel { padding: clamp(1.35rem, 1rem + 1.6vw, 2rem); background: var(--paper); border: 1px solid var(--rule); }
-  .panel__h { font-size: var(--step-1); margin-bottom: var(--sp-3); }
+  .panel__h { font-size: var(--fs-lede); margin-bottom: var(--sp-3); }
   .panel__dl { display: grid; margin: 0; border-top: 1px solid var(--rule); }
   .panel__dl > div {
     display: grid;
@@ -155,9 +137,9 @@ import { TREATMENTS } from '../../data/treatments';
     color: var(--muted);
     padding-top: 0.3em;
   }
-  .panel__dl dd { margin: 0; font-size: 0.9375rem; line-height: 1.5; }
+  .panel__dl dd { margin: 0; font-size: var(--fs-sm); line-height: 1.5; }
   .panel__dl a { text-underline-offset: 3px; }
-  .panel__missing { color: var(--ink-55); }
+  .panel__missing { color: var(--muted); }
   .panel__cta { margin-top: var(--sp-4); width: 100%; justify-content: center; }
 
   @media (min-width: 62rem) {

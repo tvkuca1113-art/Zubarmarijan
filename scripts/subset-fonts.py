@@ -5,11 +5,8 @@ Subset the self-hosted variable fonts to the characters this site needs.
 Keeps German (ä ö ü ß) and the Croatian/Bosnian/Serbian diacritics (č ć đ š ž),
 plus the punctuation the typography actually uses.
 
-It also trims the variable axes: the weight axis is clamped to the 400-600 range
-the stylesheet declares, and Newsreader's optical-size axis is pinned. Together
-with the character subset that takes the two fonts on a German page from about
-176 KB to about 55 KB. Pinning opsz costs automatic optical sizing; the pinned
-value is chosen for the mid-size range where most of the serif type sits. Variable axes are preserved,
+It also clamps each weight axis to the range the stylesheet actually declares:
+Manrope 400-800 for headlines, Inter 400-600 for body text. Variable axes are preserved,
 so the CSS weight ranges keep working.
 
     python3 scripts/subset-fonts.py
@@ -39,7 +36,7 @@ FEATURES = ["kern", "liga", "calt", "ccmp", "locl", "onum", "tnum", "frac", "mar
 
 # Axis limits per family. A tuple narrows the axis, a number pins it.
 AXIS_LIMITS = {
-    "newsreader": {"wght": (400, 600), "opsz": 30},
+    "manrope": {"wght": (400, 800)},
     "inter": {"wght": (400, 600)},
 }
 

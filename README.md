@@ -18,14 +18,22 @@ Kapuzinerstraße 11, 80337 München (Ludwigsvorstadt-Isarvorstadt).
 | Framework | [Astro 5](https://astro.build) — `output: 'static'` |
 | Sprache | TypeScript (strict) |
 | Bilder | `sharp` über ein eigenes Skript (`scripts/build-assets.mjs`) |
-| Client-JS | ~3 KB, reines Vanilla-TS in vier kleinen Inseln |
-| Schriften | Newsreader + Inter, lokal gehostet (SIL OFL 1.1) |
+| 3D | three.js, nachgeladen, mit eigenem Modell und statischem Poster |
+| Client-JS | ~9 KB für die Seite; three.js kommt erst bei Bedarf |
+| Schriften | Manrope + Inter, lokal gehostet (SIL OFL 1.1) |
 
 **Warum Astro:** Jede Seite wird als vollständiges HTML ausgeliefert. Es gibt
 kein Framework im Browser, kein Hydrations-Bundle und keine externe Anfrage —
 weder für Schriften noch für Karten, Tracking oder Instagram-Einbettungen. Das
 passt zu einer Website, deren Hauptaufgabe darin besteht, eine Telefonnummer und
 verlässliche Informationen schnell auszuliefern.
+
+**Gestaltung:** Tiefes Tintenblau `#183449` für die Bühne, warmes Weiß `#F6F4EF`
+für die Inhaltsflächen, `#18252D` für Text, `#DCE7ED` als ruhige Fläche und
+`#BA6347` als warmer Akzent. Der Akzent erreicht auf warmem Weiß nur 3,9:1 und
+trägt deshalb Linien, Marken und große Typo; für Fließtext gibt es die dunklere
+Variante `--accent-ink`. Alle Paarungen sind in `src/styles/global.css`
+dokumentiert.
 
 ## Einrichten
 
@@ -43,6 +51,8 @@ npm run dev        # http://localhost:4321
 | `npm run preview` | `dist/` lokal ausliefern |
 | `npm run check` | `astro check` (Typen und Templates) |
 | `npm run assets` | Responsive Bildvarianten erzeugen (siehe unten) |
+| `npm run model` | Zahnmodell neu erzeugen (`public/models/zahn.glb`) |
+| `npm run poster` | Statisches Poster der 3D-Szene rendern (braucht Playwright) |
 
 ## Bilder einsetzen
 
@@ -125,3 +135,38 @@ freigeben lassen und die Strukturdaten aus
 - **[docs/ASSETS.md](docs/ASSETS.md)** — Bildherkunft und Rechte
 - **[docs/VERIFICATION.md](docs/VERIFICATION.md)** — was geprüft wurde, was nicht
 - **[docs/HANDOVER.md](docs/HANDOVER.md)** — was die Praxis noch liefern muss
+
+
+## Die interaktive Darstellung
+
+„Ein Zahn. Drei Perspektiven." steht direkt unter dem Hero. Drei gewöhnliche
+HTML-Schaltflächen wechseln Kamera und Sichtbarkeit; jede hat einen kurzen
+Erklärtext, einen Link zur passenden Leistung und daneben, außerhalb des Canvas,
+die Telefonnummer.
+
+Alles Wesentliche steht im HTML. Ohne JavaScript, ohne WebGL und ohne Modell
+bleiben Überschriften, Erklärungen, Links und Telefonnummer vollständig
+benutzbar; sichtbar ist dann das Poster.
+
+**Modell.** `public/models/zahn.glb` ist Originalarbeit für dieses Projekt und
+wird parametrisch erzeugt, nicht heruntergeladen:
+
+```bash
+npm run model     # Geometrie -> glTF 2.0
+npm run poster    # Poster aus demselben Modell und derselben Kamera
+```
+
+Es enthält drei Netze: `zahn_intakt`, `zahn_praepariert` und `krone`. Der
+Zustand „Erhalten" zeigt, wie die Krone auf den beschliffenen Stumpf gesetzt
+wird. Die Anatomie ist bewusst vereinfacht und auf der Seite so gekennzeichnet.
+
+**Kamera und Licht** stehen in `src/data/tooth-views.js` und werden von der Szene
+und vom Poster-Renderer gemeinsam gelesen, damit der Übergang vom Poster zur
+Szene nicht springt. Die Texte liegen in `src/data/tooth-copy.ts`.
+
+**Ladeverhalten.** three.js und das Modell werden erst nach `load` und erst in
+der Nähe des Abschnitts angefordert. Schmale Bildschirme, grobe Zeiger,
+`saveData` und 2G bekommen stattdessen die Schaltfläche „3D ansehen". Gerendert
+wird nur, solange sich etwas bewegt; außerhalb des Sichtbereichs und im
+Hintergrund-Tab steht die Schleife still. Verlorener WebGL-Kontext und ein
+fehlendes Modell fallen sichtbar auf das Poster zurück.

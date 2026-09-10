@@ -1,8 +1,16 @@
 # Evidenzregister
 
-Stand der Prüfung: **9. September 2026**. Maschinenlesbar in
+Stand der Prüfung: **9. September 2026**, erneut bestätigt am **10. September 2026**. Maschinenlesbar in
 `src/data/practice.ts` (Export `EVIDENCE`); die Seite `/hinweise/` rendert
 dasselbe Register für Besucher.
+
+## Nachprüfung 10.09.2026
+
+Vor dem Redesign wurden alle Geschäftsangaben erneut gegen Jameda und ärzte.de
+geprüft. Unverändert: Praxisbezeichnung, Anschrift, Postleitzahl, Telefonnummer,
+Stadtbezirk, beide Versicherungsarten, weiterhin keine Online-Terminbuchung über
+Jameda, weiterhin keine Patientenbewertungen und weiterhin kein Leistungs- oder
+Preisverzeichnis auf dem Profil.
 
 ## Wie geprüft wurde
 

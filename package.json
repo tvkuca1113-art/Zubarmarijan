@@ -9,14 +9,19 @@
     "build": "astro build",
     "preview": "astro preview --host",
     "check": "astro check",
-    "assets": "node scripts/build-assets.mjs"
+    "assets": "node scripts/build-assets.mjs",
+    "model": "node scripts/export-glb.mjs",
+    "poster": "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 node scripts/render-tooth-poster.mjs"
   },
   "dependencies": {
     "astro": "^5.14.1",
-    "sharp": "^0.34.4"
+    "sharp": "^0.34.4",
+    "three": "^0.186.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
+    "@types/three": "^0.185.4",
+    "playwright": "^1.56.1",
     "typescript": "^5.9.2"
   }
 }

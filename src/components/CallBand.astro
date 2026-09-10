@@ -3,40 +3,37 @@ import { PRACTICE } from '../data/practice';
 interface Props { title?: string; note?: string; }
 const {
   title = 'Besprechen Sie es im Termin.',
-  note = 'Termine werden telefonisch vereinbart. Diese Website nimmt keine Buchungen entgegen und speichert keine Patientendaten.',
+  note = 'Termine werden telefonisch vereinbart.',
 } = Astro.props;
 ---
-<section class="callband band-ink grain" aria-labelledby="callband-title">
+<section class="callband band-ink" aria-labelledby="callband-title">
   <div class="shell callband__inner">
     <div>
-      <p class="eyebrow eyebrow--accent">Termin</p>
+      <span class="tick" aria-hidden="true"></span>
       <h2 id="callband-title" class="callband__title">{title}</h2>
       <p class="callband__note">{note}</p>
     </div>
     <div class="callband__action">
       <a class="callband__phone" href={PRACTICE.phoneHref}>{PRACTICE.phoneDisplay}</a>
-      <a class="btn" href={PRACTICE.phoneHref}>Jetzt anrufen</a>
-      <p class="callband__addr">{PRACTICE.street} · {PRACTICE.postalCode} {PRACTICE.city}</p>
+      <a class="btn btn--light" href={PRACTICE.phoneHref}>Jetzt anrufen</a>
+      <p class="callband__addr fine">{PRACTICE.street} · {PRACTICE.postalCode} {PRACTICE.city}</p>
     </div>
   </div>
 </section>
 
 <style>
-  .callband { position: relative; padding-block: clamp(3rem, 2.2rem + 4vw, 6rem); }
+  .callband { padding-block: clamp(2.75rem, 2rem + 3.6vw, 5.5rem); }
   .callband__inner { display: grid; gap: var(--sp-5); }
-  .callband__title { font-size: var(--step-3); margin: var(--sp-3) 0 var(--sp-3); max-width: 18ch; }
-  .callband__note { color: #a4b0b2; font-size: var(--step--1); max-width: 32rem; }
+  .callband__title { font-size: var(--fs-h2); margin-bottom: var(--sp-3); max-width: 16ch; }
+  .callband__note { color: var(--muted-ink); font-size: var(--fs-sm); max-width: 30rem; }
   .callband__action { display: grid; justify-items: start; gap: var(--sp-3); align-content: start; }
   .callband__phone {
-    font-family: var(--font-display);
-    font-size: var(--step-4);
-    letter-spacing: -0.025em;
-    color: #fff;
-    text-decoration: none;
-    transition: color 300ms var(--ease);
+    font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(2.25rem, 1.5rem + 3vw, 3.5rem);
+    letter-spacing: -0.035em; color: var(--paper); text-decoration: none; line-height: 1;
   }
-  .callband__phone:hover { color: #9fc2c8; }
-  .callband__addr { color: #8b9a9d; font-size: 0.875rem; margin: 0; }
+  .callband__phone:hover { color: var(--accent-lift); }
+  .callband__addr { color: #8ea4b4; font-size: var(--fs-fine); margin: 0; }
   @media (min-width: 56rem) {
     .callband__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr); column-gap: var(--sp-6); align-items: center; }
   }

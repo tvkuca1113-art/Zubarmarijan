@@ -3,15 +3,17 @@ import BaseHead from '../components/BaseHead.astro';
 import DemoNotice from '../components/DemoNotice.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import MobileCallBar from '../components/MobileCallBar.astro';
+import MobileActionBar from '../components/MobileActionBar.astro';
 import '../styles/global.css';
 
 interface Props {
   title: string;
   description: string;
   lang?: string;
+  /** 'ink' when the page opens on the dark stage. */
+  headerTheme?: 'ink' | 'paper';
 }
-const { title, description, lang = 'de' } = Astro.props;
+const { title, description, lang = 'de', headerTheme = 'paper' } = Astro.props;
 ---
 <!doctype html>
 <html lang={lang}>
@@ -22,21 +24,11 @@ const { title, description, lang = 'de' } = Astro.props;
   <body>
     <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
     <DemoNotice />
-    <SiteHeader />
+    <SiteHeader theme={headerTheme} />
     <main id="inhalt">
       <slot />
     </main>
     <SiteFooter />
-    <MobileCallBar />
-
-    <script>
-      // Hairline under the header, only once the page has actually scrolled.
-      const hdr = document.querySelector('.hdr');
-      if (hdr) {
-        const sync = () => hdr.setAttribute('data-stuck', String(window.scrollY > 8));
-        sync();
-        window.addEventListener('scroll', sync, { passive: true });
-      }
-    </script>
+    <MobileActionBar />
   </body>
 </html>

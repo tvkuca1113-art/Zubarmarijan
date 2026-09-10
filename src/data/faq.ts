@@ -3,48 +3,46 @@ export interface FaqItem {
   a: string[];
 }
 
-/** Homepage FAQ. Every answer stays inside what the sources actually support. */
+/** Six practical questions. Each answer stays inside what can be said reliably. */
 export const HOME_FAQ: FaqItem[] = [
   {
     q: 'Wie vereinbare ich einen Termin?',
     a: [
-      'Telefonisch unter 089 537901. Ein Anruf ist der verlässlichste Weg, weil sich freie Zeiten kurzfristig ändern und am Telefon gleich geklärt werden kann, wie viel Zeit Ihr Anliegen braucht.',
-      'Ob darüber hinaus eine Online-Terminbuchung besteht, ist für diesen Entwurf nicht bestätigt. Deshalb führt jede Terminschaltfläche auf dieser Website zum Telefon und nicht zu einem Kalender.',
+      'Telefonisch unter 089 537901. Nennen Sie kurz Ihr Anliegen – Kontrolle, Beschwerden, Zahnreinigung oder Beratung zu Zahnersatz. Danach richtet sich, wie viel Zeit eingeplant wird.',
     ],
   },
   {
-    q: 'Wann ist die Praxis erreichbar?',
+    q: 'Ich bin neu in der Praxis. Was sollte ich mitbringen?',
     a: [
-      'Die aktuellen Sprechzeiten liegen für diesen Entwurf nicht bestätigt vor. Wir nennen hier bewusst keine Zeiten, die falsch sein könnten.',
-      'Rufen Sie bitte unter 089 537901 an – dort erfahren Sie die aktuellen Zeiten verlässlich.',
-    ],
-  },
-  {
-    q: 'Werden gesetzlich Versicherte behandelt?',
-    a: [
-      'Nach den öffentlichen Praxisverzeichnissen werden sowohl gesetzlich als auch privat Versicherte behandelt.',
-      'Diese Angabe stammt aus Verzeichniseinträgen, nicht aus einer Mitteilung der Praxis. Bitte bestätigen Sie Ihren Versicherungsstatus kurz bei Ihrem Anruf.',
-    ],
-  },
-  {
-    q: 'Ich habe akute Schmerzen. Was tun?',
-    a: [
-      'Rufen Sie zuerst in der Praxis an und schildern Sie kurz, worum es geht. So lässt sich am schnellsten einschätzen, was möglich ist.',
-      'Außerhalb der Sprechzeiten hilft der zahnärztliche Notdienst der Kassenzahnärztlichen Vereinigung Bayerns weiter. Diese Praxis betreibt keinen eigenen Notdienst.',
-    ],
-  },
-  {
-    q: 'Kann ich auf Bosnisch, Kroatisch oder Serbisch sprechen?',
-    a: [
-      'Der Instagram-Auftritt der Praxis veröffentlicht auch auf Bosnisch/Kroatisch/Serbisch. Daraus folgt allerdings nicht, welche Sprache im Behandlungszimmer angeboten wird.',
-      'Fragen Sie das bitte kurz am Telefon. Eine Zusammenfassung der wichtigsten Angaben auf BKS finden Sie auf der Seite „Informacije".',
+      'Ihre Versichertenkarte und eine Liste der Medikamente, die Sie einnehmen. Hilfreich sind außerdem Hinweise auf Allergien oder Vorerkrankungen.',
+      'Wenn Sie zuvor woanders in Behandlung waren, bringen Sie vorhandene Unterlagen gerne mit.',
     ],
   },
   {
     q: 'Was kostet eine Behandlung?',
     a: [
-      'Diese Website nennt keine Preise. Was eine Behandlung kostet, hängt vom Befund, vom Umfang und von Ihrem Versicherungsstatus ab.',
-      'Bei Zahnersatz wird vorab ein Heil- und Kostenplan erstellt, den Sie bei Ihrer Krankenkasse einreichen. Besprechen Sie die Kosten bitte direkt in der Praxis.',
+      'Was eine Behandlung kostet, hängt vom Befund und von der gewählten Versorgung ab. Eine belastbare Zahl gibt es deshalb erst nach der Untersuchung.',
+      'Bei Zahnersatz wird vorab ein Heil- und Kostenplan erstellt, den Sie bei Ihrer Krankenkasse einreichen.',
+    ],
+  },
+  {
+    q: 'Werden gesetzlich Versicherte behandelt?',
+    a: [
+      'Nach den öffentlichen Praxisverzeichnissen werden gesetzlich und privat Versicherte behandelt. Bestätigen Sie Ihren Versicherungsstatus bitte kurz bei Ihrem Anruf.',
+    ],
+  },
+  {
+    q: 'Kann ich auf Bosnisch, Kroatisch oder Serbisch sprechen?',
+    a: [
+      'Die wichtigsten Angaben zur Praxis finden Sie auf einer eigenen Seite auf Bosnisch, Kroatisch und Serbisch.',
+      'Ob auch das Gespräch in der Praxis auf BKS möglich ist, fragen Sie bitte kurz am Telefon.',
+    ],
+  },
+  {
+    q: 'Wie finde ich die Praxis?',
+    a: [
+      'Kapuzinerstraße 11 in der Ludwigsvorstadt-Isarvorstadt, südlich der Innenstadt. Der Eingang trägt das blaue Hausnummernschild.',
+      'Für die Route öffnet der Link auf der Kontaktseite Google Maps in einem neuen Tab.',
     ],
   },
 ];

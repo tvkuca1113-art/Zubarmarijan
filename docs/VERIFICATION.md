@@ -1,156 +1,134 @@
 # Prüfbericht
 
-Alle Angaben beziehen sich auf den Build vom **9. September 2026**, geprüft
-gegen `dist/`, ausgeliefert über einen lokalen statischen Server.
+Build vom **10. September 2026**, geprüft gegen `dist/` über einen lokalen
+statischen Server.
 
 ## Werkzeuge
 
 | | |
 |---|---|
 | Build | `astro build` — 10 Seiten, ohne Fehler |
-| Typen | `astro check` — 0 Fehler, 0 Warnungen, 1 Hinweis (`document.execCommand` als Fallback im Kopier-Button, bewusst) |
-| Browser | Chromium 147 über Playwright 1.56, lokal |
-| Breiten | 390 px (Mobil), 768 px (Tablet), 1440 px (Desktop) |
+| Typen | `astro check` — 0 Fehler, 0 Warnungen, 2 Hinweise |
+| Browser | Chromium 147 über Playwright 1.56, lokal, WebGL über SwiftShader |
+| Breiten | 360, 390, 768 und 1440 px |
 
-## Automatisch geprüft — 10 Seiten × 3 Breiten
+## Automatisch geprüft — 10 Seiten × 4 Breiten
 
 | Prüfung | Ergebnis |
 |---|---|
-| Horizontaler Überlauf | keiner auf 30 Seiten-/Breiten-Kombinationen |
+| Horizontaler Überlauf | keiner in 40 Seiten-/Breiten-Kombinationen |
 | Genau eine `h1` je Seite | erfüllt |
-| Fehlende oder gebrochene Bilder | keine, nach vollständigem Durchscrollen jeder Seite |
-| `tel:`-Ziele | alle 10 Seiten, ausnahmslos `tel:+4989537901` |
-| `noindex, nofollow` | auf allen 10 Seiten gesetzt |
-| Konsolenfehler | keine — mit einer Ausnahme, siehe unten |
+| Überschriftenebenen ohne Sprung | erfüllt |
+| Fehlende oder gebrochene Bilder | keine, nach vollständigem Durchscrollen |
+| `tel:`-Ziele | ausnahmslos `tel:+4989537901` |
+| `noindex, nofollow` | auf allen 10 Seiten |
+| Lesetext ≥ 16 px | erfüllt; darunter liegen nur Versalien-Labels und Kleingedrucktes (≥ 14 px) |
+| Touch-Ziele ≥ 44 px | erfüllt für Schaltflächen, Reiter und die mobile Aktionsleiste |
+| Konsolenfehler | keine |
 
-> Die einzige Konsolenmeldung stammt von der 404-Seite, die korrekterweise mit
-> HTTP 404 antwortet. Das ist das erwartete Verhalten, kein Fehler.
+## Funktionen — 37 Prüfungen, alle bestanden
 
-## Funktionen — 34 Prüfungen, alle bestanden
+**Mobiles Menü** — öffnet und schließt, `aria-expanded` folgt, Fokus springt
+hinein und kehrt zurück, Escape schließt, das Panel sitzt exakt unter dem
+Header, die Aktionsleiste weicht, Links navigieren.
 
-**Mobiles Menü** — Schaltfläche ab < 62 rem sichtbar · Panel initial geschlossen ·
-öffnet per Klick · `aria-expanded` folgt dem Zustand · Fokus springt in das Panel ·
-Telefonleiste weicht dem geöffneten Menü · **Escape schließt** · Fokus kehrt zur
-Schaltfläche zurück · Links navigieren.
+**Akkordeon** — geschlossen beim Laden, öffnet per Klick und per Tastatur.
 
-**Akkordeon** — geschlossen beim Laden · öffnet per Klick · Inhalt sichtbar ·
-öffnet per Tastatur (Enter).
-
-**Themenauswahl** — vier Reiter · erster vorausgewählt · Pfeil rechts wechselt ·
-Panel wird sichtbar, das andere **wirklich** ausgeblendet · `End` springt ans
-Ende · Pfeil rechts läuft um.
-
-**Adresse kopieren** — schreibt exakt `Kapuzinerstraße 11, 80337 München` in die
-Zwischenablage · meldet Erfolg über `role="status"`.
+**Adresse kopieren** — schreibt `Kapuzinerstraße 11, 80337 München` in die
+Zwischenablage und meldet den Erfolg über `role="status"`.
 
 **Sprungmarke** — erster Tabstopp, wird beim Fokus sichtbar.
 
-**Reduzierte Bewegung** — keine Transformation im Hero · die Pause-Schaltfläche
-wird ausgeblendet, weil es nichts zu pausieren gibt.
+**„Ein Zahn. Drei Perspektiven."**
 
-**Zeiger-Parallaxe** — reagiert auf Mausbewegung (max. ±5° / ±3,4°) ·
-Pause-Schaltfläche sichtbar bei feinem Zeiger · setzt `aria-pressed` · pausiert
-setzt die Neigung auf 0.
+- Drei Bedienelemente, vollständig per Tastatur: Pfeiltasten, `Home`, `End`, Umlauf.
+- Der Fokus folgt der Auswahl, jeder Wechsel wird über `aria-live` angesagt.
+- **Die Panelhöhe bleibt konstant** (gemessen 254 px vor und nach dem Wechsel):
+  alle drei Texte liegen in derselben Rasterzelle.
+- Der Telefon-Aufruf steht außerhalb des Canvas und ist in jedem Zustand sichtbar.
+- Reduzierte Bewegung: Zustände wechseln ohne Übergang, keine Eingangsanimation.
+- **Ohne WebGL**: Rückfallhinweis erscheint, Poster bleibt sichtbar, Erklärungen
+  und Reiter funktionieren weiter.
+- **Modell nicht ladbar** (Abruf blockiert): derselbe Rückfall, Telefon-Aufruf bleibt.
+- **Ohne JavaScript**: Überschrift, Telefonlinks, Poster, erste Erklärung und
+  das Akkordeon funktionieren.
 
-**Ohne JavaScript** — Überschrift vorhanden · Telefonlink vorhanden · Akkordeon
-öffnet über das native `<details>`-Verhalten.
+## Ladeverhalten
 
-## Schriften
+Die 3D-Szene wird erst nach `load` angefordert, und nur wenn der Abschnitt in die
+Nähe kommt. Schmale Bildschirme, grobe Zeiger, `saveData` und 2G-Verbindungen
+bekommen stattdessen die Schaltfläche „3D ansehen".
 
-Glyphenprüfung auf `/hr/` bei geladenen Schriften: **keine fehlenden Zeichen**
-für `ÄÖÜäöüß ČčĆćĐđŠšŽž – — „ " · … 0123456789 €` in beiden Familien. Alle drei
-verwendeten Schnitte (400/500/600) verfügbar.
-
-| | vorher | nachher |
-|---|---|---|
-| Newsreader latin | 128,9 KB | **30,4 KB** |
-| Inter latin | 47,1 KB | **24,5 KB** |
-| Kritischer Pfad einer deutschen Seite | 176 KB | **≈ 55 KB** |
-| Alle vier Dateien | 343,7 KB | 72,1 KB |
-
-Erreicht durch Zeichen-Subsetting plus Beschneiden der Variationsachsen
-(`wght` auf 400–600, Newsreaders `opsz` auf 30 fixiert). Die Originale liegen
-unter `vendor/fonts/` und werden nicht ausgeliefert.
-
-## Bilder
-
-Alle fünf Plätze liefern AVIF mit WebP- und JPEG-Rückfall, `srcset`, `sizes`
-sowie `width` und `height` aus den echten Maßen. Nur das Hero-Porträt lädt
-`eager` mit `fetchpriority="high"`, alles Übrige `lazy`.
-
-Da die Bildplätze an die gelieferten Seitenverhältnisse angepasst wurden, wird
-kein Bild beschnitten. Im Browser geprüft: Chromium wählt AVIF und die
-passende Breite je Ansichtsgröße, etwa 900 px bei 390 px Breite und doppelter
-Pixeldichte, 420 px bei 1440 px und einfacher Dichte.
-
-| erste Ansicht, vor dem Scrollen | Gewicht |
+| | erster Bildaufbau, ohne Scrollen |
 |---|---|
-| 390 px, Pixeldichte 2 | 169 KB |
-| 1440 px, Pixeldichte 1 | 172 KB |
+| 390 px, Pixeldichte 2 | 166 KB |
+| 1440 px, Pixeldichte 1 | 164 KB |
 
-## Auslieferungsgrößen
+Vor dieser Umstellung lud der Desktop 1488 KB im ersten Bildaufbau, weil
+three.js und das Modell sofort angefordert wurden. Das ist behoben.
 
-| | roh | gzip |
-|---|---|---|
-| Startseite (HTML inkl. eingebettetem CSS) | 52,3 KB | 11,8 KB |
-| `/kontakt/` | 21,4 KB | 6,4 KB |
-| `/hr/` | 16,2 KB | 4,5 KB |
-| Client-JavaScript, gesamt | 4,3 KB | — |
-| `dist/` gesamt | 444 KB | — |
+Komprimiert, gemessen am Build:
 
-JavaScript wird als fünf kleine Inline-Blöcke ausgeliefert; es gibt kein
-Framework-Bundle und keine externe Anfrage.
+| Datei | roh | gzip | brotli |
+|---|---|---|---|
+| `three.module.js` | 729 KB | 187 KB | 152 KB |
+| `GLTFLoader.js` | 46 KB | 14 KB | 12 KB |
+| `zahn.glb` | 548 KB | 321 KB | **157 KB** |
+| 3D gesamt | 1325 KB | 523 KB | 322 KB |
+
+Erster Bildaufbau komprimiert: rund **101 KB** (HTML 9 KB, Schriften 45 KB,
+CSS und Porträt der Rest). Schriften: Manrope und Inter, lokal, auf den
+benötigten Zeichensatz reduziert.
 
 ## Von Hand am Bildschirm geprüft
 
-Screenshots auf 390, 768 und 1440 px gesichtet und daraufhin korrigiert:
+Screenshots vor und nach dem Redesign auf 390 und 1440 px verglichen. Dabei
+gefunden und behoben:
 
-1. **Hero zu groß auf dem Desktop** — Terminaktion und Kontaktangaben lagen
-   unterhalb der ersten Bildschirmhöhe. Überschriftgröße, Abstände und
-   Spaltenverhältnis angepasst; jetzt stehen Überschrift, beide Schaltflächen,
-   Adresse und Telefonnummer bei 1440 × 900 vollständig im ersten Viewport.
-2. **Bildplatz dominierte die Komposition** — Porträt auf `min(100%, 26rem)`
-   begrenzt, Artikelbilder nach ihrem eigenen Seitenverhältnis gedeckelt.
-3. **Behandlungsindex überlappte** — Titelspalte verbreitert, Schriftgrad
-   reduziert; „Zahnentfernung" lief zuvor in den Beschreibungstext.
-4. **Innenseiten waren zentriert statt am Raster ausgerichtet** — die
-   Breitenbegrenzung lag auf demselben Element wie der zentrierende Container
-   und gewann durch die höhere Spezifität von Astros Scoped Styles.
-5. **Bildflächen wurden beschnitten** — die SVG-Grafik nutzte eine quadratische
-   `viewBox` bei nicht-quadratischen Flächen. Jede Fläche zeichnet jetzt in
-   ihrem eigenen Seitenverhältnis.
-6. **Mobiles Menü war unbrauchbar** — der Header trägt `backdrop-filter` und
-   wurde damit zum umgebenden Block für das `position: fixed`-Panel, das dadurch
-   auf Höhe 0 zusammenfiel. Panel aus dem `<header>` herausgezogen.
-7. **`hidden` wirkte nicht** — Klassen mit eigener `display`-Angabe stachen die
-   Browserregel für `[hidden]` aus, sodass abgewählte Panels sichtbar blieben.
-   Globale Regel ergänzt.
-8. **Menü lag unter dem Header** — die feste Position ignorierte die
-   Entwurfsleiste über dem Header. Der Versatz wird jetzt beim Öffnen gemessen.
+1. **Kopfzeile über hellem Grund unlesbar** — die transparente Leiste über der
+   dunklen Bühne stand tatsächlich über der hellen Seitenfarbe. Sie trägt jetzt
+   die Bühnenfarbe und wird beim Scrollen zur hellen Leiste.
+2. **Poster blieb hinter der Szene sichtbar** — die Überblendung hing an einem
+   Vorfahren-Attributselektor, den Astros Scoped Styles umschreiben. Jetzt über
+   Klassen gesteuert.
+3. **Modell stieß an die Stagekante** — der Kamerastand für „Erhalten" war zu
+   nah; das Modell wird jetzt vollständig gezeigt.
+4. **Poster lag unter der Beschriftung** — die Bühne hat einen inneren Rand
+   bekommen, aus dem auch die Rendergröße berechnet wird.
+5. **Porträt schnitt auf dem Mobiltelefon den Kopf an** — dort gilt jetzt das
+   Originalseitenverhältnis, der Zuschnitt bleibt dem Desktop vorbehalten.
+6. **Sekundärtext lag bei 15 px** — die gesamte Textskala wurde angehoben;
+   Kleingedrucktes trägt eine eigene Klasse.
+
+## Modell
+
+`public/models/zahn.glb` entsteht aus `scripts/build-tooth-model.mjs` und
+`scripts/export-glb.mjs`. Beim Bau wurden drei Fehler gefunden und behoben:
+nach innen zeigende Normalen (4276 von 4664 Seitenpunkten), eine entartete
+Ringreihe im Zentrum der Kaufläche und eine falsch gewickelte Brücke zwischen
+den beiden Wurzelspitzen. Nachgemessen: 4318 Seitenpunkte zeigen nach außen,
+alle 1089 Punkte der Kaufläche nach oben.
+
+Bekannte Vereinfachung: Die Wurzelspitzen laufen in einer kleinen Fläche
+zusammen statt in zwei getrennte Spitzen. Bei der Darstellungsgröße auf der
+Seite ist das nicht sichtbar. Die Seite kennzeichnet das Modell als
+„Vereinfachte Darstellung".
 
 ## Nicht geprüft — ausdrücklich offen
 
-- **Kein Lighthouse-Lauf.** Es werden keine Punktzahlen behauptet. Die
-  Kennwerte in Abschnitt 15 des Briefings (LCP < 2,5 s, INP < 200 ms,
-  CLS < 0,1) sind Ziele, keine gemessenen Ergebnisse. Belastbare Werte
-  brauchen echtes Hosting und echte Endgeräte.
+- **Kein Lighthouse-Lauf, keine Feldmessung.** LCP, INP und CLS sind Ziele, keine
+  Ergebnisse. Die oben genannten Größen sind Laborwerte aus dem lokalen Build.
+  INP lässt sich aus einem Laborlauf ohnehin nicht ableiten.
 - **Keine Prüfung mit Screenreader oder auf echten Geräten.** Semantik,
-  Fokusführung, Tastaturbedienung und Kontraste wurden bewusst gebaut und
-  automatisiert geprüft; das ersetzt keinen manuellen Test mit NVDA, VoiceOver
-  oder TalkBack. Es wird keine Barrierefreiheits-Zertifizierung behauptet.
+  Fokusführung, Tastaturbedienung, Kontraste und reduzierte Bewegung wurden
+  gebaut und automatisiert geprüft. Das ist kein Konformitätsnachweis nach
+  WCAG 2.2 AA und wird auch nicht als solcher behauptet.
 - **Keine gerenderte Ansicht der vier Referenz-Websites.** Der Netzwerk-Proxy
-  dieser Umgebung trennt die Chromium-Tunnel zu externen Hosts; Screenshots
-  waren nicht möglich. Ausgewertet wurde stattdessen ausgeliefertes HTML und
-  CSS (Schriftpaarungen, Farbwerte, Überschriftenhierarchie, `tel:`-Muster).
-  Von Southcliff Dental Group kam beim zweiten Abruf kein Dokument zurück.
-- **Instagram nicht eingesehen.** HTTP 429 mit Weiterleitung auf die
-  Anmeldeseite. Zugangsbeschränkungen wurden nicht umgangen.
-- **Nicht in der Praxis angerufen**, keine Nachricht gesendet, keine
-  Testbuchung ausgelöst. Die Telefonnummer stammt ausschließlich aus
-  öffentlichen Verzeichnissen.
-- **Bilder sind eingebunden, aber nicht freigegeben.** Alle fünf Fotos liegen im
-  Build. Porträt und Eingang sind retuschierte Vorlagen ohne Nutzungserlaubnis
-  der Praxis, die drei übrigen sind KI-Illustrationen (siehe `docs/ASSETS.md`).
-- **Ältere Browser** wurden nicht getestet. `::details-content` und
-  `interpolate-size` stehen hinter `@supports`; ohne Unterstützung öffnet das
-  Akkordeon ohne Animation.
+  dieser Umgebung trennt Chromium-Tunnel zu externen Hosts. Ausgewertet wurde
+  ausgeliefertes HTML und CSS.
+- **Instagram, Pinterest und Facebook nicht eingesehen.** Instagram antwortete
+  mit HTTP 429 und leitete auf die Anmeldeseite weiter. Zugangsbeschränkungen
+  wurden nicht umgangen.
+- **Nicht in der Praxis angerufen**, keine Nachricht gesendet, keine Testbuchung.
+- **Medizinische Texte fachlich ungeprüft**, einschließlich der drei Erklärungen
+  in der 3D-Sektion.

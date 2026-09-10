@@ -3,45 +3,42 @@ interface Props {
   eyebrow: string;
   title: string;
   lede?: string;
-  /** Breadcrumb-style parent link. */
   parent?: { href: string; label: string };
 }
 const { eyebrow, title, lede, parent } = Astro.props;
 ---
-<section class="phero grain">
-  <div class="shell"><div class="phero__inner">
-    {parent && (
-      <p class="phero__crumb">
-        <a href={parent.href}>{parent.label}</a>
-        <span aria-hidden="true">/</span>
-      </p>
-    )}
-    <p class="eyebrow eyebrow--accent">{eyebrow}</p>
-    <h1 class="phero__title">{title}</h1>
-    {lede && <p class="lede phero__lede">{lede}</p>}
-  </div></div>
+<section class="phero band-ink">
+  <div class="shell">
+    <div class="phero__inner">
+      {parent && (
+        <p class="phero__crumb"><a href={parent.href}>{parent.label}</a><span aria-hidden="true">/</span></p>
+      )}
+      <p class="eyebrow phero__eyebrow">{eyebrow}</p>
+      <h1 class="phero__title">{title}</h1>
+      {lede && <p class="lede phero__lede">{lede}</p>}
+    </div>
+  </div>
 </section>
 
 <style>
   .phero {
     position: relative;
     overflow: hidden;
-    padding-block: clamp(2.5rem, 1.6rem + 3.4vw, 5rem) clamp(2.25rem, 1.6rem + 2.6vw, 4rem);
-    background:
-      radial-gradient(80% 90% at 88% 8%, rgba(66, 106, 116, 0.09) 0%, rgba(66, 106, 116, 0) 60%),
-      var(--warm-white);
-    border-bottom: 1px solid var(--rule);
+    padding-block: clamp(2.25rem, 1.5rem + 3vw, 4.5rem) clamp(2.5rem, 1.8rem + 3vw, 4.5rem);
   }
-  .phero__inner { max-width: 52rem; }
-  .phero__crumb {
-    display: flex;
-    gap: 0.5rem;
-    font-size: 0.8125rem;
-    color: var(--muted);
-    margin-bottom: var(--sp-3);
+  .phero::after {
+    content: '';
+    position: absolute;
+    inset: -40% -20% auto 40%;
+    height: 160%;
+    background: radial-gradient(46% 50% at 60% 40%, rgba(186, 99, 71, 0.14) 0%, rgba(186, 99, 71, 0) 70%);
+    pointer-events: none;
   }
-  .phero__crumb a { text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 1px; }
-  .phero__crumb a:hover { border-bottom-color: var(--accent); color: var(--accent); }
-  .phero__title { font-size: var(--step-4); margin: var(--sp-3) 0 0; max-width: 20ch; }
-  .phero__lede { margin-top: var(--sp-4); }
+  .phero__inner { max-width: 48rem; position: relative; z-index: 1; }
+  .phero__crumb { display: flex; gap: 0.5rem; font-size: var(--fs-fine); color: #9fb4c3; margin-bottom: var(--sp-3); }
+  .phero__crumb a { text-decoration: none; border-bottom: 1px solid #3d5a70; padding-bottom: 1px; }
+  .phero__crumb a:hover { border-bottom-color: var(--accent-lift); color: var(--paper); }
+  .phero__eyebrow { color: var(--accent-lift); }
+  .phero__title { font-size: clamp(2.25rem, 1.4rem + 3.4vw, 4rem); margin: var(--sp-3) 0 0; max-width: 18ch; }
+  .phero__lede { margin-top: var(--sp-4); color: #b6c8d5; }
 </style>

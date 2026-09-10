@@ -50,7 +50,7 @@ const hrefFor = (slug: string) => (slug === 'behandlungen' ? '/behandlungen/' : 
           <ul class="card__list">
             {t.clarify.map((c) => <li>{c}</li>)}
           </ul>
-          <a class="btn btn--accent card__cta" href={PRACTICE.phoneHref}>
+          <a class="btn card__cta" href={PRACTICE.phoneHref}>
             <svg class="btn__icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
               <path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.5 5.2 2 2 0 0 1 6.5 3Z" stroke-linejoin="round"/>
             </svg>
@@ -58,14 +58,14 @@ const hrefFor = (slug: string) => (slug === 'behandlungen' ? '/behandlungen/' : 
           </a>
         </div>
 
-        <p class="art__sources">
-          Allgemeine medizinische Hintergründe in eigenen Worten zusammengefasst nach:
-          {t.sources.map((s, i) => (
+        <p class="art__sources fine">
+          Allgemeine Hintergründe nach der Patienteninformation der
+          {t.sources.map((src, i) => (
             <>
               {i > 0 && ', '}
-              <a href={s.url} rel="noopener noreferrer nofollow" target="_blank">{s.label}</a>
+              {' '}<a href={src.url} rel="noopener noreferrer nofollow" target="_blank">{src.label}</a>
             </>
-          ))}. Diese Seite ersetzt keine Untersuchung und trifft keine Aussage über Ihren Fall.
+          ))}. Sie ersetzen keine Untersuchung.
         </p>
       </aside>
     </div>
@@ -96,9 +96,9 @@ const hrefFor = (slug: string) => (slug === 'behandlungen' ? '/behandlungen/' : 
   .art__grid { display: grid; gap: var(--sp-6); }
   .art__body { max-width: 42rem; }
   .art__lede {
-    font-size: var(--step-1);
+    font-size: var(--fs-lede);
     line-height: 1.55;
-    color: var(--ink-70);
+    color: var(--muted);
     max-width: 36rem;
   }
   .art__lede + .art__lede { margin-top: var(--sp-3); }
@@ -106,10 +106,10 @@ const hrefFor = (slug: string) => (slug === 'behandlungen' ? '/behandlungen/' : 
 
   .art__section { margin-top: var(--sp-6); }
   .art__h2 {
-    font-size: var(--step-2);
+    font-size: var(--fs-h3);
     margin-bottom: var(--sp-3);
     padding-top: var(--sp-3);
-    border-top: 1px solid var(--rule);
+    border-top: 2px solid var(--text);
     max-width: 24ch;
   }
   .art__section p + p { margin-top: 0.9rem; }
@@ -119,10 +119,11 @@ const hrefFor = (slug: string) => (slug === 'behandlungen' ? '/behandlungen/' : 
     padding: clamp(1.25rem, 1rem + 1.4vw, 1.85rem);
     background: var(--paper);
     border: 1px solid var(--rule);
+    border-radius: 10px;
   }
-  .card--muted { background: var(--sand); border-color: #d9d2c5; }
+  .card--muted { background: var(--surface); border-color: var(--surface-deep); }
   .card__h {
-    font-size: var(--step-1);
+    font-size: var(--fs-lede);
     margin-bottom: var(--sp-3);
     letter-spacing: -0.008em;
   }
@@ -130,9 +131,9 @@ const hrefFor = (slug: string) => (slug === 'behandlungen' ? '/behandlungen/' : 
   .card__list li {
     position: relative;
     padding-left: 1.4rem;
-    font-size: 0.9375rem;
+    font-size: var(--fs-sm);
     line-height: 1.55;
-    color: var(--ink-70);
+    color: var(--muted);
   }
   .card__list li::before {
     content: '';
@@ -142,7 +143,7 @@ const hrefFor = (slug: string) => (slug === 'behandlungen' ? '/behandlungen/' : 
     background: var(--accent);
   }
   .card__cta { margin-top: var(--sp-4); width: 100%; justify-content: center; }
-  .art__sources { font-size: 0.8125rem; color: var(--ink-55); line-height: 1.6; max-width: 30rem; }
+  .art__sources { font-size: var(--fs-fine); color: var(--muted); line-height: 1.6; max-width: 30rem; }
   .art__sources a { color: inherit; text-underline-offset: 3px; }
 
   @media (min-width: 62rem) {
@@ -154,8 +155,8 @@ const hrefFor = (slug: string) => (slug === 'behandlungen' ? '/behandlungen/' : 
     .art__aside { position: sticky; top: 6.5rem; }
   }
 
-  .weiter { list-style: none; margin-top: var(--sp-4); border-top: 1px solid var(--rule); }
-  .weiter__title { font-size: var(--step-2); margin-top: var(--sp-2); }
+  .weiter { list-style: none; margin-top: var(--sp-4); border-top: 2px solid var(--text); }
+  .weiter__title { font-size: var(--fs-h2); margin-top: var(--sp-2); }
   .weiter__link {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 1.5rem;
@@ -165,9 +166,9 @@ const hrefFor = (slug: string) => (slug === 'behandlungen' ? '/behandlungen/' : 
     text-decoration: none;
     transition: padding-inline 300ms var(--ease), background 300ms var(--ease);
   }
-  .weiter__link:hover { background: var(--warm-white); padding-inline: 0.85rem; }
-  .weiter__name { font-family: var(--font-display); font-size: var(--step-1); }
-  .weiter__teaser { grid-column: 1; color: var(--muted); font-size: var(--step--1); max-width: 48ch; }
+  .weiter__link:hover { background: var(--paper); padding-inline: 0.85rem; }
+  .weiter__name { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-lede); letter-spacing: -0.015em; }
+  .weiter__teaser { grid-column: 1; color: var(--muted); font-size: var(--fs-sm); max-width: 48ch; }
   .weiter__arrow { grid-row: 1; grid-column: 2; color: var(--accent); justify-self: end; }
   @media (min-width: 56rem) {
     .weiter__link { grid-template-columns: minmax(0, 16rem) minmax(0, 1fr) 1.5rem; align-items: baseline; }

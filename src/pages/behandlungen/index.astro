@@ -41,8 +41,7 @@ const untersuchung = TREATMENT_BY_SLUG['behandlungen'];
       </ul>
 
       <p class="scope">
-        Weitere Leistungen sind für diesen Entwurf nicht bestätigt und werden deshalb hier
-        nicht genannt. Was darüber hinaus möglich ist, erfahren Sie im Gespräch mit der Praxis.
+        Was darüber hinaus möglich ist, erfahren Sie im Gespräch mit der Praxis.
       </p>
     </div>
   </section>
@@ -58,7 +57,7 @@ const untersuchung = TREATMENT_BY_SLUG['behandlungen'];
 </Base>
 
 <style>
-  .cards { list-style: none; display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+  .cards { list-style: none; display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
   .cards__link {
     display: grid;
     /* The card stretches to the tallest sibling; without an explicit template the
@@ -68,7 +67,7 @@ const untersuchung = TREATMENT_BY_SLUG['behandlungen'];
     gap: 0.5rem;
     height: 100%;
     padding: clamp(1.35rem, 1rem + 1.6vw, 2.1rem);
-    background: var(--warm-white);
+    background: var(--paper);
     text-decoration: none;
     transition: background 300ms var(--ease);
   }
@@ -87,21 +86,23 @@ const untersuchung = TREATMENT_BY_SLUG['behandlungen'];
   }
   .cards__title {
     font-family: var(--font-display);
-    font-size: var(--step-2);
-    line-height: 1.16;
-    letter-spacing: -0.015em;
+    font-weight: 700;
+    font-size: var(--fs-h3);
+    line-height: 1.14;
+    letter-spacing: -0.024em;
     margin-top: 0.15rem;
   }
-  .cards__teaser { color: var(--muted); font-size: var(--step--1); line-height: 1.55; }
+  .cards__teaser { color: var(--muted); font-size: var(--fs-sm); line-height: 1.55; }
   .cards__more {
     align-self: end;
     padding-top: var(--sp-3);
     display: inline-flex;
     gap: 0.45rem;
     align-items: center;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--accent);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    font-family: var(--font-display);
+    color: var(--accent-ink);
   }
   @media (min-width: 40rem) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (min-width: 66rem) { .cards { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
@@ -109,11 +110,11 @@ const untersuchung = TREATMENT_BY_SLUG['behandlungen'];
   .scope {
     margin-top: var(--sp-5);
     max-width: 40rem;
-    font-size: var(--step--1);
-    color: var(--ink-55);
+    font-size: var(--fs-sm);
+    color: var(--muted);
   }
 
   .anchor { padding-top: var(--sp-7); scroll-margin-top: 5.5rem; }
   .anchor__label { margin-bottom: var(--sp-2); }
-  .anchor__title { font-size: var(--step-3); max-width: 20ch; }
+  .anchor__title { font-size: var(--fs-h2); max-width: 20ch; }
 </style>
